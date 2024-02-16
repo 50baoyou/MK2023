@@ -1,0 +1,36 @@
+.main {
+	overflow-y: auto;
+
+	height: 100%;
+}
+
+.main-item {
+	height: 10.6667vw /* 40px -> 10.6667vw */;
+}
+
+.main-item > a {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 0 5.3333vw /* 20px -> 5.3333vw */;
+	height: 100%;
+}
+
+.main-text {
+	height: 5.3333vw /* 20px -> 5.3333vw */;
+
+	font-size: 4.2667vw /* 16px -> 4.2667vw */;
+	line-height: 5.3333vw /* 20px -> 5.3333vw */;
+
+	color: #262626;
+}
+
+.main-tag {
+	border-top: 1px solid #c2c4ca;
+	border-right: 1px solid #c2c4ca;
+	width: 2.1333vw /* 8px -> 2.1333vw */;
+	height: 2.1333vw /* 8px -> 2.1333vw */;
+
+	transform: rotate(45deg);
+}

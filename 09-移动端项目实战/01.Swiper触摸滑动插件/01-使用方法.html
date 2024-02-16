@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+
+		<link rel="stylesheet" href="./js/swiper-bundle.min.css" />
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.swiper {
+				box-sizing: border-box;
+				width: 375px;
+				height: 300px;
+				border: 1px solid black;
+			}
+
+			.swiper-slide {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 80px;
+			}
+
+			.box-1 {
+				background-color: blueviolet;
+			}
+
+			.box-2 {
+				background-color: brown;
+			}
+
+			.box-3 {
+				background-color: cadetblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="swiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide box-1">Slide 1</div>
+				<div class="swiper-slide box-2">Slide 2</div>
+				<div class="swiper-slide box-3">Slide 3</div>
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+
+			<!-- 如果需要导航按钮 -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+
+			<!-- 如果需要滚动条 -->
+			<!-- <div class="swiper-scrollbar"></div> -->
+		</div>
+
+		<script src="./js/swiper-bundle.min.js"></script>
+
+		<script>
+			// 多个实例使用 Id选择器
+			const mySwiper = new Swiper(".swiper", {
+				// direction: "vertical", // 垂直切换选项
+				initialSlide: 2, // 默认显示索引2
+				effect: "fade", // 切换效果
+				fadeEffect: {
+					crossFade: true, // 开启淡出
+				},
+				loop: true, // 循环模式选项（会在前后复制幻灯片）
+				speed: 400, // 切换速度
+				grabCursor: true, // PC端小手
+				// freeMode: true, // 自由模式，可做菜单
+
+				// 如果需要自动播放
+				autoplay: {
+					delay: 2000,
+				},
+
+				// 如果需要分页器
+				pagination: {
+					el: ".swiper-pagination",
+					clickable: true,
+				},
+
+				// 如果需要前进后退按钮
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+
+				// 如果需要滚动条
+				// scrollbar: {
+				// 	el: ".swiper-scrollbar",
+				// },
+			});
+
+			// 常用事件
+			//	1-init 初始化后执行
+			//	2-slideChangeTransitonStart 切换过渡开始时执行
+			//	3-slideChangeTransitonEnd 切换过渡结束时执行
+
+			// 常用属性
+			//	1-activeIndex 当前幻灯片索引值
+			//  2-previousIndex 上一张幻灯片索引值
+			//	3-width/height 幻灯片宽高
+
+			// 常用方法
+			// 	1-slideNext() 切换上一张
+			//	2-slidePrev() 切换下一张
+			//	3-slideTo()	切换到指定 slide
+		</script>
+	</body>
+</html>

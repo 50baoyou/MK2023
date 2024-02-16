@@ -1,0 +1,18 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+
+	padding: 0 5.3333vw /* 20px -> 5.3333vw */;
+}
+
+.header .icon-back,
+.header .icon-aixin,
+.header .icon-fenxiang {
+	font-size: 5.3333vw /* 20px -> 5.3333vw */;
+
+	color: #fff;
+}
+
+.header .icon-fenxiang {
+	margin-left: 5.3333vw /* 20px -> 5.3333vw */;
+}

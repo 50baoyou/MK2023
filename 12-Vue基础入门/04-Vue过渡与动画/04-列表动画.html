@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+		<title>Document</title>
+		<style>
+			/*
+            进入的起始状态：v-enter-from
+            进入的生效状态：v-enter-active
+            进入的结束状态：v-enter-to
+
+            离开的起始状态：v-leave-from 
+            离开的生效状态：v-leave-active
+            离开的结束状态：v-leave-to
+            */
+			.v-enter-from {
+				opacity: 0;
+			}
+
+			.v-move, /* 对移动中的元素应用的过渡 */
+			.v-enter-active,
+			.v-leave-active {
+				transition: all 3s ease-out;
+			}
+
+			.v-leave-to {
+				opacity: 0;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					show: true,
+					message: 'hello world!',
+					list: [1, 2, 3],
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {
+					this.list.unshift(this.list.length + 1);
+				},
+			},
+			// 根组件
+			template: `
+				<div>
+                    <TransitionGroup tag="ul">
+                        <li v-for="item in list" :key="item+1">{{item}}</li>
+                    </TransitionGroup>
+
+                    <button @click="handleClick">点击</buttom>
+                </div>
+			`,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

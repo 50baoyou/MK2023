@@ -1,0 +1,12 @@
+<div class="swiper">
+    <div class="swiper-wrapper">
+        {{each data}}
+        <div class="swiper-slide">
+            <a href="javascript:;"/>
+                <img class="swiper-img" src="{{$value.url}}" alt=""/>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+    <div class="swiper-pagination"></div>
+</div>

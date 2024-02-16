@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+
+		<style>
+			/* css reset */
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			li {
+				list-style: none;
+			}
+
+			/* menu */
+			.menu {
+				width: 100px;
+				background-color: rgba(0, 0, 0, 0.1);
+				margin: 10px;
+			}
+			.menu-item {
+				position: relative;
+				padding: 5px;
+				cursor: pointer;
+			}
+			.menu-content {
+				display: none;
+				position: absolute;
+				left: 100%;
+				top: 0;
+				width: 200px;
+				height: 100px;
+				padding: 0 5px;
+				background-color: rgba(0, 0, 0, 0.1);
+			}
+			.menu-item:hover {
+				background-color: rgba(0, 0, 0, 0.4);
+			}
+			.menu-item:hover .menu-content {
+				display: block;
+			}
+			.menu-loading {
+				margin: 45px 0 0 92px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="menu" class="menu">
+			<!-- <li class="menu-item" data-key="hot" data-done="done">
+				<span>热门</span>
+				<div class="menu-content">
+					<p><img class="menu-loading" src="./loading.gif" alt="加载中" /></p>
+				</div>
+			</li> -->
+		</ul>
+
+		<script>
+			const menuEl = document.getElementById("menu");
+
+			const url = "https://www.imooc.com/api/mall-PC/index/menu";
+
+			function wait(ms) {
+				return new Promise((resolve) => {
+					setTimeout(resolve, ms);
+				});
+			}
+
+			function getJSON(url) {
+				return new Promise((resolve) => {
+					const xhr = new XMLHttpRequest();
+
+					xhr.addEventListener(
+						"load",
+						async () => {
+							if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+								await wait(1000);
+								resolve(xhr.response);
+							}
+						},
+						false
+					);
+
+					xhr.open("GET", url, true);
+
+					xhr.responseType = "json";
+
+					xhr.send(null);
+				});
+			}
+
+			// function createMenu($el, data) {
+			// 	let html = "";
+
+			// 	for (const item of data) {
+			// 		html += `
+			//                     <li class="menu-item" data-key="${item.key}" data-done="">
+			//                         <span>${item.title}</span>
+			//                         <div class="menu-content">
+			//                             <p><img class="menu-loading" src="./loading.gif" alt="加载中" /></p>
+			//                         </div>
+			//                     </li>
+			//                     `;
+			// 	}
+
+			// 	$el.innerHTML = html;
+			// }
+
+			// (async () => {
+			// 	const menuResult = await getJSON(url);
+			// 	createMenu(menuEl, menuResult.data);
+
+			// 	const $items = menuEl.querySelectorAll(".menu-item");
+			// 	[...$items].forEach((item) => {
+			// 		item.addEventListener(
+			// 			"mouseenter",
+			// 			async () => {
+			// 				if (item.dataset.done === "done") {
+			// 					return;
+			// 				}
+
+			// 				const subMenu = await getJSON(`${url}/${item.dataset.key}`);
+
+			// 				item.dataset.done = "done";
+
+			// 				let html = "";
+
+			// 				for (const item of subMenu.data) {
+			// 					html += `<p>${item.title}</p>`;
+			// 				}
+
+			// 				item.querySelector(".menu-content").innerHTML = html;
+			// 			},
+			// 			false
+			// 		);
+			// 	});
+			// })();
+
+			// 面向对象写法
+			class Menu {
+				constructor($el) {
+					this.$el = $el;
+					this.url = url;
+				}
+
+				async getData(url = this.url) {
+					return (await getJSON(url)).data;
+				}
+
+				render(data) {
+					let html = "";
+
+					for (const item of data) {
+						html += `
+			                         <li class="menu-item" data-key="${item.key}" data-done="">
+			                             <span>${item.title}</span>
+			                             <div class="menu-content">
+			                                 <p><img class="menu-loading" src="./loading.gif" alt="加载中" /></p>
+			                             </div>
+			                         </li>
+			                         `;
+					}
+
+					this.$el.innerHTML = html;
+				}
+			}
+
+			class SubMenu {
+				constructor($el) {
+					this.$el = $el;
+					this.url = url;
+				}
+
+				needGetData() {
+					if (this.$el.dataset.done !== "done") {
+						this.$el.dataset.done = "done";
+						return true;
+					}
+					return false;
+				}
+
+				async getData(url = `${this.url}/${this.$el.dataset.key}`) {
+					return (await getJSON(url)).data;
+				}
+
+				render(data) {
+					let html = "";
+
+					for (const item of data) {
+						html += `<p>${item.title}</p>`;
+					}
+
+					this.$el.querySelector(".menu-content").innerHTML = html;
+				}
+			}
+
+			(async () => {
+				const menu = new Menu(menuEl);
+				menu.render(await menu.getData());
+
+				const $items = menuEl.querySelectorAll(".menu-item");
+				for (const item of $items) {
+					item.addEventListener(
+						"mouseenter",
+						async () => {
+							const subMenu = new SubMenu(item);
+
+							if (!subMenu.needGetData()) {
+								return;
+							}
+
+							console.log(await subMenu.getData());
+							subMenu.render(await subMenu.getData());
+						},
+						false
+					);
+				}
+			})();
+		</script>
+	</body>
+</html>

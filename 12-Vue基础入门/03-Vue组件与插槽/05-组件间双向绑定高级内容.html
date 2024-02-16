@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					message: 'hello world!',
+					value: 'xk',
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick(msg) {},
+			},
+			// 根组件
+
+			/**
+			 * v-model修饰符
+			 *
+			 * .lazy：默认情况下，v-model指令在input事件触发时同步数据。使用.lazy修饰符可以将同步改为在change事件触发时同步数据。
+			 * .number：将输入值转换为数字类型。如果输入值无法转换为数字，则返回原始值。
+			 * .trim：去除输入值的首尾空格。
+			 * .debounce：使用lodash的debounce函数延迟同步数据。可以传递一个毫秒数作为参数，表示延迟的时间。
+			 **/
+			template: `
+				<div>
+					{{message}}
+					{{value}}
+
+					<demo v-model.capitalize="value"/>
+				</div>
+			`,
+		});
+
+		app.component('demo', {
+			props: {
+				modelValue: String,
+				// 用于修改 v-model 指令行为的特殊修饰符，可以用于控制自定义组件的行为
+				modelModifiers: {
+					// 如果没有修饰符时 this.modelModifiers 返回一个空对象
+					default: () => ({}), // 如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错
+				},
+			},
+			created() {
+				console.log(this.modelModifiers); // 接受修饰符 { capitalize: true }
+			},
+			emits: ['update:modelValue'],
+			methods: {
+				handleItemClick() {
+					let value = this.modelValue + '347';
+					// this.modelModifiers. + 修饰符名称
+					if (this.modelModifiers.capitalize) {
+						value = capitalize(value);
+					}
+					this.$emit('update:modelValue', value);
+				},
+			},
+			template: `
+				<div @click="handleItemClick">{{modelValue}}</div>
+			`,
+		});
+
+		const vm = app.mount('#root');
+
+		// capitalize() 方法可以将字符串的第一个字符转换为大写字母，而其他字符保持不变
+		function capitalize(str) {
+			return str.charAt(0).toUpperCase() + str.slice(1);
+		}
+	</script>
+</html>

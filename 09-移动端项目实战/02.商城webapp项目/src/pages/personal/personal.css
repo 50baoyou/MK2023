@@ -1,0 +1,28 @@
+.personal-page {
+	display: grid;
+	grid-template-rows: 39.7333vw 49.3333vw /* 185px -> 49.3333vw */ minmax(0, 1fr) 12.8vw;
+	grid-template-areas:
+		"header"
+		"user"
+		"main"
+		"tabbar";
+
+	width: 100%;
+	height: 100%;
+}
+
+.header-layout {
+	grid-area: header;
+}
+
+.user-layout {
+	grid-area: user;
+}
+
+.main-layout {
+	grid-area: main;
+}
+
+.tabbar-layout {
+	grid-area: tabbar;
+}

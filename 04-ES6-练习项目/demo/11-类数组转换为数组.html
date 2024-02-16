@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <P>01</P>
+    <P>02</P>
+    <P>03</P>
+
+    <script>
+        const p_list = document.querySelectorAll("p");
+
+        console.log(Array.from(p_list));
+        console.log([...p_list]);
+        console.log([].slice.call(p_list))
+    </script>
+</body>
+
+</html>

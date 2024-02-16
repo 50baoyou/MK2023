@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 数据
+			data() {
+				return {};
+			},
+			// 局部注册
+			components: {},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {},
+			},
+			// 根组件
+			template: `
+				<div>
+                    <demo :level="2">
+                        hello world!
+                    </demo>
+                </div>
+			`,
+		});
+
+		// template -> render -> h -> 虚拟 DOM（js对象）-> 真实 DOM -> 浏览器渲染
+		app.component('demo', {
+			props: ['level'],
+			/**
+			 * render 是字符串模板的一种替代，可以使你利用 JavaScript 的丰富表达力来完全编程式地声明组件最终的渲染输出。
+			 * h() 是 hyperscript 的简称——意思是“能生成 HTML (超文本标记语言) 的 JavaScript”。
+			 **/
+			render() {
+				const { h } = Vue;
+				// 返回虚拟 DOM
+				return h('h' + this.level, [this.$slots.default(), h('div', 'xk')]);
+			},
+			// template: `
+			//     <h1 v-if="level===1"><slot/></h1>
+			//     <h2 v-if="level===2"><slot/></h2>
+			// `,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

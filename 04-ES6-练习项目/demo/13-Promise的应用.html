@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #img {
+            width: 80%;
+            padding: 10%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img id="img" src="" alt="" id="">
+
+    <script>
+        const url_1 = "http://climg.mukewang.com/5b16558d00011ed506000338.jpg";
+        const url_2 = "http://climg.mukewang.com/5b165603000146ca06000338.jpg";
+        const imgDOM = document.getElementById("img");
+
+        // 异步加载图片
+        const loadImgAsync = (el, url, ms) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+
+                setTimeout(() => {
+                    img.onload = () => {
+                        resolve("success");
+                    };
+
+                    img.onerror = () => {
+                        reject(new Error(`Could not load image at ${url}`));
+                    };
+
+                    img.src = url;
+                    el.src = img.src;
+                }, ms);
+            });
+        }
+
+        loadImgAsync(imgDOM, url_1, 1000)
+            .then(data => {
+                console.log(data);
+                return loadImgAsync(imgDOM, url_2, 2000);
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    </script>
+</body>
+
+</html>

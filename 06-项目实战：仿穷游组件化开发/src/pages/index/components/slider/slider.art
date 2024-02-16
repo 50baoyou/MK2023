@@ -1,0 +1,18 @@
+<div class="slider">
+    <ul class="slider-content">
+        {{each items}}
+        <li class="slider-item">
+            <a href="javascript:;">
+                <img class="slider-img" src="{{$value.url}}">
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+    <div class="slider-circles" id="circles">
+          <ol>
+          {{each items}}
+            <li {{if $index == 0}}class = "active"{{/if}} data-index="{{$index}}"></li>
+            {{/each}}
+          </ol>
+        </div>
+</div>

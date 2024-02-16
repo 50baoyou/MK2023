@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 根组件
+			template: `
+                <div ref="test">hello world!</div>
+                <demo />
+			`,
+			// 组合式 API 的入口
+			setup(props, context) {
+				const { provide, ref, readonly, onMounted } = Vue;
+				const name = ref('xk347');
+
+				// 使用 readonly 防止子组件修改数据
+				provide('name', readonly(name));
+				provide('changeName', (value) => {
+					name.value = value;
+				});
+
+				// 使用 ref 获取 DOM 的引用
+				const test = ref(null); // 生成响应式引用
+				onMounted(() => {
+					console.log(test.value); // 获取 DOM 引用
+				});
+
+				return {
+					test,
+				};
+			},
+		});
+
+		app.component('demo', {
+			template: `<div>{{name}}</div>`,
+			setup() {
+				const { inject } = Vue;
+
+				const name = inject('name', 'default name');
+				const changeName = inject('changeName');
+				changeName('调用父组件的方法修改数据');
+
+				// name.value = '修改'; 不建议直接在子组件中修改父组件传递的数据
+
+				return {
+					name,
+				};
+			},
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

@@ -1,0 +1,6 @@
+
+{{each $data}}
+<div class="menu" data-n="{{$value.key}}">
+  <% include("../../../../components/loading/loading.art",{inline: true}) %>
+</div>
+{{/each}}

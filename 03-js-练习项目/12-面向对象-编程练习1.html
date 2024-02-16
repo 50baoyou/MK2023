@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var list = new Array();
+
+        for (var i = 0; i < 10; i++) {
+            list.push(parseInt(Math.random() * 100 + 1));
+        }
+
+        list.sort(function (a, b) {
+            return (a > b) ? 1 : -1;
+        });
+
+        var max_num = Math.max.apply(this, list);
+        var min_num = Math.min.apply(this, list);
+
+        console.log(list);
+        console.log("最大值为：" + max_num);
+        console.log("最小值为：" + min_num);
+    </script>
+
+</body>
+
+</html>

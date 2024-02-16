@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			const app = Vue.createApp({
+				// 数据
+				data() {
+					return {
+						message: 'hello world',
+						// 样式绑定语法
+						classString: 'red',
+						classObject: {
+							red: false,
+							green: true,
+						},
+						classArray: [{ red: false }, { green: true }],
+						// 行内样式使用 对象 形式
+						styleObject: {
+							fontSize: '30px',
+							color: 'blue',
+						},
+					};
+				},
+				// 侦听器
+				watch: {},
+				// 计算属性
+				computed: {},
+				// 方法
+				methods: {},
+				template: `
+					<div v-bind:style="styleObject">行内样式</div>
+                    <div v-bind:class="classArray">{{message}}</div>
+					<demo class="red" text="子组件中声明的 props 属性是用来接收父组件传递过来的数据的"/>
+                `,
+			});
+
+			// 主动调用组件的一方为父组件，被调用的一方为子组件
+			// attrs 是一个对象，包含了父组件传递给子组件的所有属性，除了子组件中声明的 props 属性。
+			// attrs.class 是其中的一个属性，它表示父组件传递给子组件的 class 属性。
+			app.component('demo', {
+				props: {
+					text: String,
+				},
+				template: `
+					<div v-bind:class="$attrs.class">Demo 组件1--{{text}}</div>
+					<div v-bind:class="$attrs.class">Demo 组件2</div>
+				`,
+			});
+
+			const vm = app.mount('#root');
+		</script>
+	</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+		<title>touch事件点击穿透</title>
+
+		<style>
+			.btn {
+				width: 100%;
+				height: 300px;
+				font-size: 100px;
+			}
+
+			.mask {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn" class="btn">提交</button>
+		<div id="mask" class="mask"></div>
+
+		<script>
+			//  原因：点击蒙层（mask）上的关闭按钮，蒙层消失后触发了按钮下面元素的 click 事件。（移动端 click 事件会延迟触发）
+			//      浏览器在 touchend 后会等待约300ms，原因是判断用户是否有双击行为。如果没有，则触发 click 事件。
+
+			// 解决方案
+			//      1-遮罩层延迟消失
+			//      2-下层元素不使用点击事件
+			//      3-多层元素
+			//      4-遮罩层直接使用 click 事件
+			const $btn = document.getElementById("btn");
+			const $mask = document.getElementById("mask");
+
+			$mask.addEventListener(
+				"touchend",
+				() => {
+					console.log("触摸事件");
+					$mask.style.display = "none";
+				},
+				false
+			);
+
+			$btn.addEventListener(
+				"click",
+				() => {
+					console.log("点击事件");
+				},
+				false
+			);
+		</script>
+	</body>
+</html>

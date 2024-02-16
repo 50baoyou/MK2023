@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        document.write('吓得我抱起了' + '<br>');
+
+        function output(str) {
+            return document.write(str);
+        }
+
+        function run(n) {
+            return n == 0 ? output('我的小鲤鱼') : output('抱着') + run(n - 1) + output('的我');
+        }
+
+        console.log(run(2));
+    </script>
+</body>
+
+</html>

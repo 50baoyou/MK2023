@@ -1,0 +1,120 @@
+.info {
+	height: 100%;
+}
+
+.info-bg {
+	height: 66.6667vw /* 250px -> 66.6667vw */;
+}
+
+.info-img {
+	width: 100%;
+	height: 100%;
+}
+
+.info-reserve-img {
+	width: 100%;
+}
+
+.info-content {
+	padding: 5.3333vw 5.3333vw 0 5.3333vw;
+}
+
+.info-title {
+	font-size: 3.7333vw /* 14px -> 3.7333vw */;
+	line-height: 6.4vw /* 24px -> 6.4vw */;
+	letter-spacing: 0;
+
+	color: #333333;
+}
+
+.info-tags {
+	display: flex;
+	flex-wrap: wrap;
+
+	margin-top: 2.1333vw /* 8px -> 2.1333vw */;
+}
+
+.info-tag {
+	margin-right: 3.2vw /* 12px -> 3.2vw */;
+	border: 1px solid #5278a0;
+	border-radius: 1px;
+	padding: 1.0667vw /* 4px -> 1.0667vw */;
+
+	font-size: 3.7333vw /* 14px -> 3.7333vw */;
+	line-height: 4.2667vw /* 16px -> 4.2667vw */;
+
+	color: #5278a0;
+}
+
+.info-box {
+	display: flex;
+	justify-content: space-between;
+
+	margin-top: 3.2vw /* 12px -> 3.2vw */;
+
+	font-size: 12px;
+	line-height: 4.5333vw /* 17px -> 4.5333vw */;
+	letter-spacing: 0;
+
+	color: #999;
+}
+
+.info-line {
+	margin-top: 3.2vw /* 12px -> 3.2vw */;
+	height: 1px;
+
+	background-color: #dadada;
+
+	transform: scaleY(0.5);
+}
+
+.info-part {
+	margin-top: 10.6667vw /* 40px -> 10.6667vw */;
+}
+
+.info-h2 {
+	display: flex;
+	align-items: center;
+
+	height: 8vw /* 30px -> 8vw */;
+}
+
+.info-h2 > span {
+	margin-right: 3.7333vw /* 14px -> 3.7333vw */;
+	border-left: 1.6vw /* 6px -> 1.6vw */ solid #bf2a2f;
+
+	height: 6.4vw /* 24px -> 6.4vw */;
+}
+
+.info-h2 > h2 {
+	font-size: 5.3333vw /* 20px -> 5.3333vw */;
+	line-height: 8vw /* 30px -> 8vw */;
+	letter-spacing: 0;
+
+	color: #333;
+}
+
+.info-text {
+	margin-top: 8vw /* 30px -> 8vw */;
+	padding: 0 5.3333vw /* 20px -> 5.3333vw */;
+
+	font-size: 3.7333vw /* 14px -> 3.7333vw */;
+	line-height: 6.4vw /* 24px -> 6.4vw */;
+	letter-spacing: 0;
+
+	color: #333333;
+}
+
+.info-reserve-pic {
+	margin-top: 8vw /* 30px -> 8vw */;
+	padding: 0 8vw /* 30px -> 8vw */;
+}
+
+.info-reserve-img {
+	width: 100%;
+	height: 100%;
+}
+
+.info-refund {
+	padding-bottom: 10.6667vw /* 40px -> 10.6667vw */;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			@keyframes leftToright {
+				0% {
+					transform: translateX(0px);
+				}
+				50% {
+					transform: translateX(-50px);
+				}
+				0% {
+					transform: translateX(0px);
+				}
+			}
+
+			.animation {
+				animation: leftToright 3s;
+			}
+
+			.transiton {
+				background-color: whitesmoke;
+				transition: background-color 3s ease 0s;
+			}
+
+			.transiton:hover {
+				background-color: brown;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					animate: {
+						transiton: true,
+						animation: true,
+					},
+					message: 'hello world!',
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {},
+			// 根组件
+
+			template: `
+				<div>
+					<div :class="animate">{{message}}</div>
+                </div>
+			`,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

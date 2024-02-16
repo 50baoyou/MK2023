@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 300px;
+            height: 300px;
+            background-color: aquamarine;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="box">
+
+    </div>
+
+    <script>
+
+        class Parent {
+            // 实例属性
+            name = "父类";
+
+            // 静态属性/类属性
+            static tag = "1.0";
+
+            constructor(name) {
+                // 实例属性
+                this.name = name;
+            }
+
+            // 静态方法/类方法
+            static getTag() {
+                console.log(Parent.tag);
+            }
+
+            // 实例方法
+            sayName() {
+                console.log(this.name);
+            }
+        }
+
+        // 定义父类原型上的属性和方法
+        Parent.prototype.flag = 123;
+        Parent.prototype.run = () => {
+            console.log("跑起来了");
+        }
+
+        class Child extends Parent {
+            constructor(name) {
+                super(name);
+            }
+
+            static getTag() {
+                // 子类的静态方法中 super作为对象使用时，指向父类(父类就是子类的原型)
+                console.log(super.run);
+                console.log(super.flag);
+            }
+
+            speak() {
+                // 子类的实例方法中 super作为对象使用，指向父类的原型（即Parent.prototype）
+                console.log(super.flag);
+                super.run();
+            }
+        }
+
+        const c1 = new Child("c1");
+        Child.getTag();
+        c1.speak();
+
+        // 访问父类的原型
+        console.log(Parent.prototype);
+    </script>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 根组件
+			template: `
+				<div>
+					<div>input: <input v-model="name" /></div>
+					<div>name is {{name}}</div>
+                </div>
+				<div>
+					<div>input: <input v-model="age" /></div>
+					<div>age is {{age}}</div>
+                </div>
+			`,
+			// 组合式 API 的入口
+			setup(props, context) {
+				const {
+					ref,
+					reactive,
+					toRefs,
+					toRef,
+					onMounted,
+					onRenderTracked,
+					onRenderTriggered,
+				} = Vue;
+
+				onMounted(() => {
+					console.log(`the component is now mounted.`);
+				});
+
+				onRenderTracked(() => {
+					console.log('onRenderTracked 当组件渲染过程中追踪到响应式依赖时调用');
+				});
+
+				onRenderTriggered(() => {
+					console.log('onRenderTriggered 当响应式依赖的变更触发了组件渲染时调用');
+				});
+
+				const obj = reactive({
+					name: 'xk',
+					age: 30,
+				});
+
+				const { name, age } = toRefs(obj);
+
+				return {
+					name,
+					age,
+				};
+			},
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

@@ -1,0 +1,5 @@
+// 常量
+const ELEMENT_NODE = 1;
+const SLIDER_ANIMATION_CLASSNAME = "slider-animation";
+
+export { ELEMENT_NODE, SLIDER_ANIMATION_CLASSNAME };

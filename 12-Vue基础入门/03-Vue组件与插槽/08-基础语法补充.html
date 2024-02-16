@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					message: 'hello world!',
+					count: 1,
+				};
+			},
+			// 注意：ref 只在组件渲染完成后才会被赋值，因此在组件的 mounted 钩子函数中使用 ref 是最安全的方式。
+			mounted() {
+				console.log(this.$refs.count.innerHTML);
+			},
+			// 跨组件通信
+			provide: {
+				// provide(){return this.count} 提供的数据不会实时更新
+				msg: '跨组件通信',
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {},
+			// 根组件
+
+			/**
+			 * ref 是一个用于给元素或组件注册引用信息的特殊属性。
+			 * 通过 ref，可以在父组件中直接访问子组件或 DOM 元素，而不需要通过 props 或事件来传递数据。
+			 **/
+
+			/**
+			 * provide / inject
+			 * 是一对用于跨组件通信的API。
+			 * provide 可以在父组件中定义一个对象，然后在子组件中使用 inject 来注入这个对象，从而实现跨组件通信。
+			 **/
+			template: `
+				<div ref="count">
+					{{message}}
+                    <demo />
+                </div>
+			`,
+		});
+
+		app.component('demo', {
+			inject: ['msg'], // 在子组件中，可以使用 inject 来注入这个对象
+			template: `
+                <div>
+                    xk{{msg}}
+                </div>
+            `,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

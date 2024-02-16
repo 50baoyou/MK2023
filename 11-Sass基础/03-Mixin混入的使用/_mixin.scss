@@ -1,0 +1,8 @@
+// 将一组 CSS 属性集合封装起来的
+@mixin singleline-ellipsis($width) {
+	width: $width;
+
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+}

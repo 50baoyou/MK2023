@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			const app = Vue.createApp({
+				// 数据
+				data() {
+					/**
+					 * v-model 是一个指令，用于在表单元素上创建双向数据绑定。
+					 * 它可以将表单元素的值与 Vue 实例中的数据进行绑定
+					 * 当表单元素的值发生变化时，Vue 实例中的数据也会相应地更新，反之亦然
+					 **/
+
+					/**
+					 * true-value 和 false-value 是用于 v-model 指令的
+					 * 当使用 v-model 绑定一个布尔值时，true-value 和 false-value 分别表示绑定的值为 true 和 false 时，实际绑定的值是什么。
+					 **/
+
+					/**
+					 * 修饰符
+					 *
+					 * .lazy 修饰符用于延迟绑定一个表单输入的值，直到用户进行了实际的修改
+					 * 这意味着在输入框获得焦点时，不会立即将值绑定到组件的数据中，而是等到用户输入完成并且失去焦点时才会进行绑定
+					 *
+					 * .number 修饰符用于将用户输入的值转换为数字类型
+					 *
+					 * .trim 修饰符用于去除绑定值的首尾空格
+					 **/
+					return {
+						message: 'hello world',
+						tag: true,
+						list: [],
+						text: '',
+						value: 'xk',
+					};
+				},
+				// 侦听器
+				watch: {},
+				// 计算属性
+				computed: {},
+				// 方法
+				methods: {},
+				template: `
+					<div>{{message}}</div>
+					
+					<div>
+						<input v-model="message" /> <br/>
+						<p>{{tag}}</p>
+						<input type="checkbox" v-model="tag" /> <br/>
+						<textarea v-model="message" />
+					</div>
+
+					<div>
+						{{list}} <br/>
+						xk <input type="checkbox" v-model="list" value="xk" />
+						xf <input type="checkbox" v-model="list" value="xf" />
+						347 <input type="checkbox" v-model="list" value="347" />
+					</div>
+
+					<div>
+						{{text}} <br/>
+						xk <input type="radio" v-model="text" value="xk" />
+						xf <input type="radio" v-model="text" value="xf" />
+						347 <input type="radio" v-model="text" value="347" />
+					</div>
+
+					<div>
+						{{text}} <br/>
+						<select v-model="text">
+							<option disabled value="">请选择内容</option>
+							<option value="a">A</option>
+							<option value="b">B</option>
+							<option value="c">C</option>
+						</select>
+					</div>
+
+					<div>
+						<p>{{value}}</p>
+						<input type="checkbox" v-model="value" true-value="xk" false-value="347" /> <br/>
+					</div>
+
+					<div>
+						{{message}}
+						<input v-model.lazy="message" /> <br/>
+					</div>
+
+					<div>
+						{{typeof message}}
+						<input v-model.number="message" type="number"/> <br/>
+					</div>
+
+					<div>
+						{{message}}
+						<input v-model.trim="message" type="number"/> <br/>
+					</div>
+                `,
+			});
+
+			const vm = app.mount('#root');
+		</script>
+	</body>
+</html>

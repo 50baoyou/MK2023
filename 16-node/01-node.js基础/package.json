@@ -1,0 +1,23 @@
+{
+    "name": "test1",
+    "version": "1.0.0",
+    "description": "demo",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon --inspect=9229 ./03-nodejs/01--处理http.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "engines": {
+        "node": ">=13.2.0",
+        "npm": ">=6.13.1"
+    },
+    "dependencies": {
+        "lodash-es": "^4.17.21"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<input id="search" type="text" />
+		<ul id="result"></ul>
+
+		<script type="module">
+			import { getJSON } from "./js/index.js";
+
+			const searchInput = document.getElementById("search");
+			const resultList = document.getElementById("result");
+
+			const url = "https://www.imooc.com/api/http/json/search/suggest?words=";
+
+			const handleInputEvent = () => {
+				if (searchInput.value.trim() !== "") {
+					getJSON(`${url}${searchInput.value}`)
+						.then((response) => {
+							// console.log(response);
+							resultList.innerHTML = "";
+							resultList.style.display = "";
+							let text = "";
+							for (const item of response.data) {
+								text += `<li>${item.word}</li>`;
+							}
+							resultList.innerHTML = text;
+						})
+						.catch((error) => {
+							console.log("错误！");
+							switch (error.type) {
+								case ERROR_HTTP_CODE:
+									console.log(error.message);
+									break;
+								case ERROR_REQUEST:
+									console.log(error.message);
+									break;
+								case ERROR_ABORT:
+									console.log(error.message);
+									break;
+								case ERROR_TIMEOUT:
+									console.log(error.message);
+									break;
+							}
+						});
+				} else {
+					resultList.innerHTML = "";
+					resultList.style.display = "none";
+				}
+			};
+
+			let timer = null;
+
+			searchInput.addEventListener(
+				"input",
+				() => {
+					if (timer) {
+						clearTimeout(timer);
+					}
+					timer = setTimeout(handleInputEvent, 400);
+				},
+				false
+			);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>手势模拟</title>
+
+		<style>
+			img {
+				width: 100%;
+			}
+
+			.box {
+				width: 200px;
+				height: 200px;
+				background-color: blueviolet;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="./gesture.png" alt="移动端手势" />
+
+		<div id="box" class="box">box</div>
+	</body>
+	<script>
+		const $box = document.getElementById("box");
+
+		// 滑动手势
+		function swipe($el, fn) {
+			// 开始的触摸点
+			const start = {};
+			// 时间和距离的阈值
+			const threshold = {
+				time: 500,
+				distance: 100,
+			};
+
+			$el.addEventListener("pointerdown", startHandler, false);
+			$el.addEventListener(
+				"touchstart",
+				(event) => {
+					event.preventDefault();
+				},
+				false
+			);
+
+			function startHandler(event) {
+				event.preventDefault();
+
+				start.time = new Date().getTime();
+				start.x = event.pageX;
+				start.y = event.pageY;
+
+				document.addEventListener("pointerup", endHandler, false);
+				document.addEventListener("pointercancel", endHandler, false);
+			}
+
+			function endHandler(event) {
+				const delta = {};
+				let direction = "";
+
+				delta.time = new Date().getTime() - start.time;
+				delta.x = event.pageX - start.x;
+				delta.y = event.pageY - start.y;
+
+				if (
+					delta.time > threshold.time ||
+					(Math.abs(delta.x) < threshold.distance && Math.abs(delta.y) < threshold.distance)
+				) {
+					return;
+				} else {
+					if (Math.abs(delta.x) > Math.abs(delta.y)) {
+						if (delta.x > 0) {
+							direction = "right";
+						} else {
+							direction = "left";
+						}
+					} else {
+						if (delta.y > 0) {
+							direction = "down";
+						} else {
+							direction = "up";
+						}
+					}
+
+					fn.call($el, direction);
+				}
+
+				document.removeEventListener("pointerup", endHandler, false);
+				document.removeEventListener("pointercancel", endHandler, false);
+			}
+		}
+
+		swipe($box, function (direction) {
+			console.log(this, direction);
+		});
+	</script>
+</html>

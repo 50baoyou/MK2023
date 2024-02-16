@@ -1,0 +1,10 @@
+@import './mixin';
+
+.text {
+	// 将 mixin 中定义的样式代码插入到当前位置
+	@include singleline-ellipsis(600px);
+}
+
+.content-text {
+	@include singleline-ellipsis(1000px);
+}

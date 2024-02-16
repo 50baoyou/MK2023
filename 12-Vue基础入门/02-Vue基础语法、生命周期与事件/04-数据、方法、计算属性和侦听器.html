@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			const app = Vue.createApp({
+				/**
+				 * computed 和 methods 都能实现的功能，建议使用 computed，因为有缓存机制
+				 * computed 和 watch 都能实现的功能，建议使用 computed，因为更简洁
+				 **/
+
+				// 数据
+				data() {
+					/**
+					 * data() 方法用于定义组件的数据属性，也就是组件的状态。
+					 * 在 data() 中定义的数据属性可以在组件的模板中使用，也可以在组件的方法中使用。
+					 * 当数据属性发生变化时，Vue 会自动重新渲染组件。
+					 **/
+					return {
+						message: 'hello world',
+						count: 2,
+						price: 5,
+					};
+				},
+				// 侦听器
+				watch: {
+					/**
+					 * watch 方法用于监听数据属性的变化，并在数据属性发生变化时执行相应的操作。
+					 * 当监听的数据属性发生变化时，watch 方法会自动执行相应的回调函数。
+					 **/
+
+					// 监听 message
+					message() {
+						alert('message 发生变化');
+					},
+				},
+				// 计算属性
+				computed: {
+					/**
+					 * computed 是计算属性，它会根据依赖的数据动态计算出一个新的值，并且这个值会被缓存起来，只有当依赖的数据发生变化时才会重新计算。
+					 * computed 的值可以像普通属性一样在模板中使用。（进行数据计算时优先使用）
+					 **/
+					total() {
+						return this.count * this.price;
+					},
+				},
+				// 方法
+				methods: {
+					/**
+					 * methods 是普通方法，它不会缓存结果，每次调用都会重新计算。
+					 * methods 的值需要在模板中通过方法名来调用。
+					 **/
+					handleClick() {
+						// 所有方法中的 this 指向 Vue 的实例（即实例 app）
+						console.log(this.message); // 注意：箭头函数的 this 指向最外层
+						alert('点击事件');
+						this.message = '触发点击事件';
+					},
+					// 插值表达式中也可以调用方法
+					formatStr(str) {
+						return str.toUpperCase(str);
+					},
+				},
+				/**
+				 * 因此，如果需要根据依赖的数据动态计算出一个新的值，并且这个值需要在模板中使用，那么应该使用 computed。
+				 * 如果需要执行一些操作，并且不需要返回值，那么应该使用 methods。
+				 **/
+				template: `
+                    <div v-on:click="handleClick">{{formatStr(message)}}</div>
+                    <div>{{total}}</div> 
+                `,
+			});
+
+			const vm = app.mount('#root');
+
+			vm.$data.text = '无法改变';
+		</script>
+	</body>
+</html>

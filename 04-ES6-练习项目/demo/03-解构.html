@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script>
+        // const arr = ["a", ["b", "c", ["d"], [undefined, "g", ["x"], ["y"]]], "h", ["l"]];
+        // [a, [b, c, [d], [e = "null", g, [x], [y]]], h, [l]] = arr;
+
+        let node = {
+            type: "Identifier",
+            name: "ES",
+            loc: {
+                strat: ["line", "column"],
+                end: {
+                    line: 1,
+                    column: 4
+                }
+
+            }
+
+        };
+
+
+        let { loc: { strat: [x], end: { line: y } } } = node;
+        console.log(x, y);
+
+    </script>
+</body>
+
+</html>

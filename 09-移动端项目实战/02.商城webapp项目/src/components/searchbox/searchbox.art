@@ -1,0 +1,12 @@
+<div class="searchbox">
+    <i class="iconfont icon-sousuo"></i>
+    <form class="searchbox-form">
+        <input 
+            class="searchbox-input" 
+            name="keywords" 
+            type="text" 
+            placeholder="{{placeholder ? placeholder : '搜索目的地/折扣/关键字'}}" 
+            autocomplete="off" 
+        />
+    </form>
+</div>

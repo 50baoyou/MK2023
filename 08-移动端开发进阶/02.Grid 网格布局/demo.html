@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Grid 圣杯布局</title>
+
+		<style>
+			/*
+                -- Grid 容器属性 --
+
+                    grid-template-columns 属性定义每一列的列宽，grid-template-rows 属性定义每一行的行高。
+						用于定义单元格大小，取值：固定值, fr, auto
+							repeat(m, n) m: 重复的次数，使用 auto-fill 可以自动填充，n: 重复的值。重复某种模式也是可以的。
+							minmax(min, max) 取值 >= 最小值，并且 <= 最大值。
+
+					grid-template-areas 定义区域
+
+					grid-auto-flow 定义项目的排列顺序。
+
+                    grid-auto-rows / grid-auto-columns 定义浏览器自动创建的多余网格的 行高 / 列宽 。
+
+                    row-gap / column-gap 定义 行间距 / 列间距 。gap 综合简写方式
+                    
+					align-items / justify-items 设置项目的 垂直位置 / 水平位置 。项目不一定占满单元格。place-items 综合简写方式。
+
+					align-content / justify-content 设置整个内容区域的 垂直/水平位置 。place-content 综合简写方式。
+						取值：space-around 每个项目两侧的间隔相等。
+						取值：space-between 每个项目之间的间隔相等，项目与容器边框之间没有间隔。
+						取值：space-evenly 每个项目之间的间隔相等，项目与容器边框之间也是同样大小的间隔。
+
+					grid-template 是grid-template-columns，grid-template-rows，grid-template-areas的简写。
+					grid 是grid-template-columns，grid-template-rows，grid-template-areas，grid-auto-flow，grid-auto-rows，grid-auto-columns的简写。
+
+				
+				-- Grid 项目的属性 --
+
+					grid-column-start / grid-column-end / grid-row-start / grid-row-end 指定项目的位置。
+					gird-column / grid-row 综合简写方式。
+
+					grid-area 指定项目放在哪一个区域。
+
+					align-self / justify-self 设置项目的 垂直/水平位置，只作用于单个项目。
+					place-self 综合简写方式。
+            */
+
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			body {
+				display: grid;
+				grid-template-rows: 80px 1fr 80px;
+				grid-template-columns: 200px 1fr 200px;
+				grid-template-areas:
+					"header header header"
+					"nav main aisde"
+					"footer footer footer";
+				height: 100vh;
+				font-size: 24px;
+			}
+
+			.header-layout {
+				grid-area: header;
+				background-color: red;
+			}
+
+			.footer-layout {
+				grid-area: footer;
+				background-color: yellow;
+			}
+
+			.main-layout {
+				grid-area: main;
+				background-color: gray;
+			}
+
+			.nav-layout {
+				grid-area: nav;
+				background-color: green;
+			}
+
+			.aside-layout {
+				grid-area: aisde;
+				background-color: blue;
+			}
+
+			.grid-center {
+				display: grid;
+				justify-items: center;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header-layout grid-center">头部</div>
+
+		<div class="main-layout grid-center">主体</div>
+		<div class="nav-layout grid-center">导航</div>
+		<div class="aside-layout grid-center">侧栏</div>
+
+		<div class="footer-layout grid-center">底部</div>
+	</body>
+</html>

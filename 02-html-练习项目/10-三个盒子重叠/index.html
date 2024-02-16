@@ -1,0 +1,55 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>空间移动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 200px auto;
+            perspective: 300px;
+            position: relative;
+        }
+
+        .box p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 200px;
+        }
+
+        /* 补充代码 */
+        .one {
+            background-color: red;
+            transform: rotateX(75deg) translateZ(50px);
+        }
+
+        .two {
+            background-color: green;
+            transform: rotateX(80deg) translateZ(20px);
+        }
+
+        .three {
+            background-color: blue;
+            transform: rotateX(85deg) translateZ(-15px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p class="one"></p>
+        <p class="two"></p>
+        <p class="three"></p>
+    </div>
+</body>
+
+</html>

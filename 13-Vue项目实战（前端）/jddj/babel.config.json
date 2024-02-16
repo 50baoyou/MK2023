@@ -1,0 +1,19 @@
+{
+    // 指定Babel要使用的预设插件集合，它会根据配置的参数将代码转换为特定的目标环境
+    "presets": [
+        [
+            // 该插件的作用是根据目标环境自动选择对应的插件，并设置其转换规则
+            "@babel/preset-env",
+            {
+                // 该设置使 Babel 会自动检测代码中是否使用了 ES6+ 中的新属性或方法，并根据需要引入对应的 polyfill（使旧版浏览器中实现新的 Web API）
+                "useBuiltIns": "usage",
+                // 指定了引入的 polyfill 库版本，这里是选择了第三版
+                "corejs": 3
+            }
+        ],
+        // 使用了 Vue CLI 的默认 Babel 预设（preset），其中包含了一些针对 Vue.js 特定的语言特性转换规则
+        "@vue/cli-plugin-babel/preset"
+    ],
+    // 用于指定要使用的插件
+    "plugins": ["@babel/plugin-transform-runtime"] // 该插件的作用是将代码中的公共部分进行抽离，避免重复生成。
+}

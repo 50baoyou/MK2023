@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 使用展开运算符合并用户参数和默认参数
+        const fn = userParam => {
+            const defaultParam = {
+                username: "白给",
+                age: 18,
+                sex: "male"
+            };
+
+            const { username, age, sex } = { ...defaultParam, ...userParam };
+
+            console.log(username, age, sex);
+        };
+
+        fn({ username: "小凡" });
+
+        // 不能直接展开对象
+        console.log(...{
+            username: "白给",
+            age: 18,
+            sex: "male"
+        });
+    </script>
+</body>
+
+</html>

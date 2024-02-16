@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.area {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+
+				width: 200px;
+				height: 300px;
+
+				background-color: black;
+
+				transform: translate(-50%, -50%);
+			}
+
+			.mask {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background-color: brown;
+				opacity: 0.5;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 数据
+			data() {
+				return {
+					show: false,
+				};
+			},
+			// 局部注册
+			components: {},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {
+					this.show = !this.show;
+				},
+			},
+			// 根组件
+			// <Teleport> 是一个内置组件，它可以将一个组件内部的一部分模板“传送”到该组件的 DOM 结构外层的位置去。
+			template: `
+				<div class="area">
+                    <button @click="handleClick">按钮</button>
+                    <teleport to="body">
+                        <div class="mask" v-show="show"></div>
+                    </teleport>
+                </div>
+			`,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+		<title>Document</title>
+		<style>
+			/*
+            进入的起始状态：v-enter-from
+            进入的生效状态：v-enter-active
+            进入的结束状态：v-enter-to
+
+            离开的起始状态：v-leave-from 
+            离开的生效状态：v-leave-active
+            离开的结束状态：v-leave-to
+            */
+
+			@keyframes shake {
+				0% {
+					transform: translateX(-100px);
+				}
+				50% {
+					transform: translateX(-50px);
+				}
+				100% {
+					transform: translateX(0px);
+				}
+			}
+
+			/* ease-out 以慢速结束的过渡效果
+            ease-in 以慢速开始的过渡效果 */
+			.v-enter-from {
+				color: red;
+			}
+
+			.v-enter-active {
+				animation: shake 10s ease-out;
+				transition: all 3s ease-out;
+			}
+
+			.v-leave-active {
+				animation: shake 10s ease-in;
+				transition: all 3s ease-in;
+			}
+
+			.v-leave-to {
+				color: blue;
+			}
+
+			.slide-fade-enter-active {
+				transition: all 0.3s ease-out;
+			}
+
+			.slide-fade-leave-active {
+				transition: all 0.8s ease-in;
+			}
+
+			.slide-fade-enter-from,
+			.slide-fade-leave-to {
+				transform: translateX(20px);
+				opacity: 0;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					show: false,
+					message: 'hello world!',
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {
+					this.show = !this.show;
+				},
+				// 在元素被插入到 DOM 之前被调用
+				// 用这个来设置元素的 "enter-from" 状态
+				onBeforeEnter(el) {
+					el.style.color = 'green';
+				},
+
+				// 在元素被插入到 DOM 之后的下一帧被调用
+				// 用这个来开始进入动画，enter-active
+				onEnter(el, done) {
+					// 调用回调函数 done 表示过渡结束
+					// 如果与 CSS 结合使用，则这个回调是可选参数
+					setTimeout(() => {
+						el.style.color = 'red';
+						done();
+					}, 2000);
+				},
+
+				// 当进入过渡完成时调用。enter-to
+				onAfterEnter(el) {},
+
+				// 在元素插入被取消或打断时执行，可以进行一些清理操作
+				onEnterCancelled(el) {},
+			},
+			// 根组件
+			/**
+			 * 元素、组件的出场和入场
+			 * 入场：隐藏态--》展示态
+			 * 出场：展示态--》隐藏态
+			 *
+			 * type animation 或 transition，告诉 Vue 需要关心哪种类型（决定效果时间）
+			 * :duration 决定效果时间
+			 **/
+			template: `
+				<div>
+                    <transition name="slide-fade">
+                        <div v-if="show">1---{{message}}</div>
+                    </transition>
+
+                    <transition
+                        enter-active-class="animate__animated animate__bounce"
+                        leave-active-class="animate__animated animate__backOutDown"
+                    >
+                        <div v-if="show">2---{{message}}</div>
+                    </transition>
+
+                    <transition type="transition">
+                        <div v-if="show">3---{{message}}</div>
+                    </transition>
+
+                    <transition
+                        :css="false"
+                        @before-enter="onBeforeEnter"
+                        @enter="onEnter"
+                        @after-enter="onAfterEnter"
+                        @enter-cancelled="onEnterCancelled"
+                    >
+                        <div v-if="show">JS---{{message}}</div>
+                    </transition>
+
+                    <button @click="handleClick">点击</buttom>
+                </div>
+			`,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

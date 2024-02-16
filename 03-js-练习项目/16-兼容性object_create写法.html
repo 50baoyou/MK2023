@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        /* 以objec为原型，创建新对象
+        ** obj：对象，options：可选参数，加入新的属性
+        */
+        function create_object(obj, options) {
+            // 临时构造函数
+            function Constructor() { };
+
+            // 让临时函数的prototype指向o，这样临时函数的实例的__proto__就指向了o
+            Constructor.prototype = obj;
+
+            // 创建实例
+            let o = new Constructor();
+
+            // 如果有的话，复制属性
+            if (options) {
+                // Object.entries()方法，返回一个给定对象自身可枚举属性的键值对数组
+                for (let [k, v] of Object.entries(options)) {
+                    /* Object.defineProperty()方法,会直接在一个对象上定义一个新属性，
+                    ** 或者修改一个对象的现有属性，并返回此对象。
+                    */
+                    Object.defineProperty(o, k, v);
+                }
+            }
+
+            return o;
+        };
+
+        var obj_1 = {
+            a: 11,
+            b: 22
+        };
+
+        // 当第一个参数为null时，原型链指向Object
+        var obj_2 = create_object(null, { c: { value: 999 } });
+
+        console.log(obj_2);
+    </script>
+</body>
+
+</html>

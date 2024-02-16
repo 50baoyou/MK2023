@@ -1,0 +1,19 @@
+DOM 优化
+
+    1.渲染优化
+        1-减少 DOM 元素数量和嵌套层级
+        2-尽量避免使用 table 布局，用其他标签代替
+
+    2.选择器优化
+        1-优先使用 id 获取单个元素(id 获取元素，class 写样式)
+        2-获取多个元素，尽量通过元素本身的 className获取
+
+    3.减少 DOM 操作次数
+        1-总是将选择器的结果缓存起来
+        2-避免在循环中多次使用 innerHTML，在循环结束后使用一次
+        3-使用 DocumentFragment 优化多次的 appChild （document.createDocumentFragment()）
+        4-新创建的 DOM 元素，完成必要的操作后再添加到页面中
+        5-不要直接通过 JS 修改元素的 style，通过添加移出 class 修改元素样式（classList.toggle()）
+        6-注意强制回流：当获取的属性值包括但不限于offsetTop,offsetLeft,scrollTop,clientTop这些“全局属性”时，
+            需要此时页面上的其他元素的布局和样式处于最新状态，这会引起多次的回流和重绘。
+            这样的操作称为强制回流。（https://gist.github.com/paulirish/5d52fb081b3570c81e3a）

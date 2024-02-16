@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="detail-page" id="detail-page">
+			<!-- 头部 -->
+			<div id="header-layout" class="header-layout">
+				{{include "./components/header/header.art"}}
+			</div>
+
+			<!-- 商品信息 -->
+			<div id="info-layout" class="info-layout">
+				{{include "../../components/loading/loading.art"}}
+			</div>
+
+			<!-- 标签栏 -->
+			<div class="tabbar-layout">
+				{{include "./components/tabbar/tabbar.art"}}
+			</div>
+		</div>
+	</body>
+</html>

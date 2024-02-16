@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>2023年国庆倒计时</h1>
+    <h2 id="info"></h2>
+
+    <script>
+        var info_box = document.getElementById("info");
+
+        // 2023年国庆节
+        var target_date = new Date(2023, 9, 1);
+
+        // 定时刷新
+        setInterval(function () {
+            // 现在的日期
+            var today_date = new Date();
+            // 毫秒差
+            var num_msec = target_date - today_date;
+            // 换算为 天数 小时数 毫秒数 
+            var day = parseInt(num_msec / (1000 * 60 * 60 * 24));
+
+            var hour = parseInt(num_msec % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+
+            var minute = parseInt(num_msec % (1000 * 60 * 60) / (1000 * 60));
+
+            var millisecond = parseInt(num_msec % (1000 * 60) / 1000);
+
+            info_box.innerText = day + "天 " + hour + "时 " + minute + "分钟 " + millisecond + "秒";
+        }, 1000);
+    </script>
+</body>
+
+</html>

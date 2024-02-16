@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			const app = Vue.createApp({
+				data() {
+					return {
+						title: 'div',
+						message: '<strong>hello world</strong>',
+						disable: true,
+						text: '只渲染一次的静态内容',
+						show: true,
+						name: 'title',
+					};
+				},
+				methods: {
+					handleClick() {
+						alert('点击');
+					},
+				},
+				// v-html 将一个字符串作为参数，然后将这个字符串解析成 HTML 并插入到指定的元素中
+				// v-bind 将一个表达式的值绑定到指定的 HTML 属性上，从而实现动态更新 HTML 属性的值
+				// v-once 用于只渲染一次的静态内容。当数据发生变化时，这些内容不会被重新渲染
+				// v-if 是一个条件渲染指令，它的作用是根据表达式的值的真假来决定是否渲染某个元素
+				// v-on（缩写@事件名） 指令用于监听 DOM 事件，并在触发时执行相应的方法，.prevent 用于阻止模式事件
+				// 插值表达式中可以写 JS 表达式
+				// [] 用于绑定动态属性
+				template: `
+					<div v-html="message" v-bind:title="div"></div>
+					
+					<div>{{1+1}}</div>
+					
+					<div v-once>{{text}}</div>
+					
+					<input v-bind:disabled="disable"/>
+					
+					<div v-if="show">根据表达式的值的真假决定该元素是否显示</div>
+					
+					<button v-on:click="handleClick">点击事件</button>
+					
+					<div v-bind:[name]="title">绑定动态属性</div>
+
+					<form action="https://baidu.com" v-on:click.prevent="handleClick">
+						<button type="submit">提交</button>
+					</form>
+					`,
+			});
+
+			const vm = app.mount('#root');
+
+			// 不会变化
+			vm.$data.text = '无法改变';
+		</script>
+	</body>
+</html>

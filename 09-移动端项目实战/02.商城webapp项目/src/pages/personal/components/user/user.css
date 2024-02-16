@@ -1,0 +1,45 @@
+.user {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.user-pic {
+	overflow: hidden;
+
+	margin-top: -18.4vw /* -69px -> -18.4vw */;
+	border: 5px solid #fff;
+	border-radius: 50%;
+	width: 37.0667vw /* 139px -> 37.0667vw */;
+	height: 37.0667vw /* 139px -> 37.0667vw */;
+
+	box-shadow: 0 10px 25px 8px rgba(0, 0, 0, 0.08);
+}
+
+.user-img {
+	width: 100%;
+}
+
+.user-name {
+	margin-top: 6.4vw /* 24px -> 6.4vw */;
+	height: 7.4667vw /* 28px -> 7.4667vw */;
+
+	font-size: 5.3333vw /* 20px -> 5.3333vw */;
+	font-weight: bold;
+	line-height: 7.4667vw /* 28px -> 7.4667vw */;
+	letter-spacing: 0;
+
+	color: #203152;
+}
+
+.user-phone {
+	margin-top: 0.2667vw /* 1px -> .2667vw */;
+	height: 5.3333vw /* 20px -> 5.3333vw */;
+
+	font-size: 3.7333vw /* 14px -> 3.7333vw */;
+	line-height: 5.3333vw /* 20px -> 5.3333vw */;
+	letter-spacing: 0;
+
+	color: #7c8698;
+}

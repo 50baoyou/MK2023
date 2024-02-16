@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script>
+		/**
+		 * 生命周期函数
+		 * 指在组件实例化、渲染、更新和销毁等不同阶段会自动调用的一些方法
+		 * 这些方法可以让我们在不同的阶段进行一些操作，比如在组件创建时初始化数据、在组件销毁时清理资源等
+		 **/
+
+		/**
+		 * 钩子函数
+		 * 指在组件生命周期中被调用的一系列函数
+		 * 这些函数可以让我们在组件的不同阶段执行一些操作，比如在组件创建前、创建后、更新前、更新后、销毁前等等
+		 * 钩子函数可以让我们在组件的不同阶段进行一些自定义的操作，比如初始化数据、发送请求、更新 DOM 等等
+		 **/
+
+		const app = Vue.createApp({
+			data() {
+				return {
+					message: '8848',
+				};
+			},
+			methods: {
+				handleItemClick() {
+					alert('click');
+				},
+			},
+			// 在实例生成之前会自动执行的函数
+			beforeCreate() {
+				console.log('beforeCreate 会在实例化之前被调用，此时组件的数据和方法都还未初始化');
+			},
+			// 在实例生成之后会自动执行的函数
+			created() {
+				console.log('created 会在实例化之后被调用，此时组件的数据和方法已经初始化完成');
+			},
+			// 在组件内容被渲染到页面之前自动执行的函数
+			beforeMount() {
+				console.log(document.getElementById('root').innerHTML);
+				console.log(
+					'beforeMount 会在组件挂载到 DOM 之前被调用，此时组件的模板已经编译完成，但还未挂载到 DOM 上'
+				);
+			},
+			// 在组件内容被渲染到页面之后自动执行的函数
+			mounted() {
+				console.log(document.getElementById('root').innerHTML);
+				console.log('mounted 会在组件挂载到 DOM 后被调用，此时组件已经被渲染到页面上了');
+			},
+			// 当数据发生变化时会立即自动执行的函数
+			beforeUpdate() {
+				console.log(document.getElementById('root').innerHTML);
+				console.log('beforeUpdate 会在组件数据更新之前被调用，此时组件的数据还未更新');
+			},
+			// 当数据发生变化，页面重新渲染后，会自动执行的函数
+			updated() {
+				console.log(document.getElementById('root').innerHTML);
+				console.log('updated 会在组件数据更新之后被调用，此时组件的数据已经更新完成');
+			},
+			// 在一个组件实例被卸载之前调用
+			beforeUnmount() {
+				console.log(document.getElementById('root').innerHTML);
+				console.log('beforeUnmount 在组件卸载之前被调用');
+			},
+			// 在一个组件实例被卸载之后调用
+			unmounted() {
+				console.log(document.getElementById('root').innerHTML);
+				console.log('unmounted 在组件卸载之后被调用');
+			},
+			template: "<div v-on:click='handleItemClick'>{{message}}</div>",
+		});
+
+		const vm = app.mount('#root');
+
+		vm.$data.message = '更新数据';
+
+		// 将组件实例从 DOM 中卸载
+		app.unmount();
+	</script>
+</html>

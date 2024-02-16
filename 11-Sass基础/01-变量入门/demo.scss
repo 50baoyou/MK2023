@@ -1,0 +1,18 @@
+$text-color: #555;
+$small-font-size: 14px + 2px;
+$default-font: 'microsoft yahei';
+
+.title {
+	color: lighten($text-color, 20%); // 将颜色变浅
+	font-family: $default-font;
+}
+
+.p {
+	color: darken($text-color, 20%); // 将颜色加深
+	font-size: $small-font-size;
+}
+
+.text {
+	color: $text-color;
+	font-size: $small-font-size;
+}

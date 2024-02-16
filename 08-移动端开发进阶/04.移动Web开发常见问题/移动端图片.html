@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>移动端图片问题</title>
+
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			img {
+				width: 100%;
+				max-width: 100%;
+			}
+
+			.bg-container {
+				width: 100%;
+				/* 如果高度固定，可以使用 cover
+				height: 200px; */
+				background: url(./img/bg.png) no-repeat;
+				background-size: cover;
+				/* 如果高度不固定，使用 padding ，因为 pading 相对于宽度 */
+				padding-top: 39.7869%;
+			}
+
+			@media only screen and (min-width: 560px) {
+				.bg-container {
+					background: url(./img/bg_lg.png) no-repeat;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 1- img 图片 -->
+		<div class="img-container">
+			<img src="./img/img.jpg" alt="" />
+		</div>
+
+		<!-- 1- img 图片 -->
+		<div class="bg-container"></div>
+	</body>
+</html>

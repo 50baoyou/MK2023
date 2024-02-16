@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        ** "/内容/"这种形式表示正则表示式，或new RegExp("内容");
+        ** test() 测试是否匹配正则表达式
+        ** exec() 根据正则表达式在字符串中查找，返回结果数组或null
+        ** ^：匹配开头，$：匹配结尾
+        **
+        ** \d：匹配一个数字
+        ** \D：匹配一个非数字
+        ** \w：匹配一个单词字符（字母，数字，下划线）
+        ** \W：匹配一个非单词字符
+        ** \s：匹配一个空白字符（空格，制表符，换行符）
+        ** .：匹配一个任意字符
+        ** |：匹配指定几项之间的一项，表示或
+        **
+        ** [xyz]：创建一个字符集，匹配方括号中的任意字符,- 表示指定范围，^ 表示否定
+
+        ** {n}：匹配前面一个字符刚好出现了n次
+        ** {n,}：匹配前面一个字符至少出现了n次
+        ** {n,m}：匹配前面一个字符至少出现了n次，最多出现了m次
+        ** *：匹配前一个表达时0次或多次，等价{0,}
+        ** +：匹配前一个表达时1次或多次，等价{1,}
+        ** ?：匹配前一个表达时0次或1次，等价{0,1}
+        ** 
+        ** 修饰符，用于使用正则表达式高级搜索 i：不区分大小写搜索，g：全局搜索
+        */
+
+        var regexp1 = /^[a-zA-Z]{5}$/;
+        var regexp2 = /^[a-z\.]{5}$/;
+        var regexp3 = /^[a-z]{3}[a-ln-z]$/;
+
+        var regexp4 = /^[1][3-9]\d{5}$/;
+        var regexp5 = /^\w{5}[1-9a-zA-z\_]$/;
+
+        var regexp6 = /^[1]\d{10}$/;
+        var regexp7 = /^[a-zA-Z]\d{1,}[a-zA-Z]$/;
+        var regexp8 = /^www\.\w{1,}\.com(.cn){0,1}$/;
+
+        // exec()方法逐条遍历
+        var regexp9 = /\b\w{1,}\d{1}\b/g;
+        var regexp9 = /\b(\w{1,})(\d{1})\b/g;
+
+        var str1 = "123-456-789";
+        var str2 = "aaa1-bbb1-ccc1";
+
+        while (result = regexp9.exec(str2)) {
+            console.log(result);
+            alert(result);
+        }
+
+        // 全局匹配分组分组时，exec会返回本次匹配到的结果，并会使用表达式中的分组继续匹配此次结果
+        // console.log(regexp9.exec(str2));
+        // alert(
+        //     regexp9.exec(str2)
+        // );
+    </script>
+</body>
+
+</html>

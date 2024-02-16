@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=  , initial-scale=1.0" />
+		<title>Document</title>
+
+		<style>
+			.ad {
+				display: block;
+				width: 300px;
+				max-width: 100%;
+				height: 150px;
+				margin: 0 auto;
+			}
+			.none {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<img id="ad" class="ad none" src="./ad.jpg" alt="前端体系课" />
+
+		<script>
+			const $ad = document.getElementById("ad");
+
+			// 1--回调函数
+			// function ad() {
+			// 	setTimeout(() => {
+			// 		// 显示广告
+			// 		$ad.classList.remove("none");
+
+			// 		// 隐藏广告
+			// 		setTimeout(() => {
+			// 			$ad.classList.add("none");
+			// 		}, 2000);
+			// 	}, 1000);
+			// }
+
+			// ad();
+
+			// 2--Promise
+			// function wait(ms) {
+			// 	return new Promise((resolve) => {
+			// 		setTimeout(resolve, ms);
+			// 	});
+			// }
+
+			// wait()
+			// 	.then(() => {
+			// 		// 隐藏广告
+			// 		$ad.classList.add("none");
+
+			// 		return wait(1000);
+			// 	})
+			// 	.then(() => {
+			// 		// 显示广告
+			// 		$ad.classList.remove("none");
+
+			// 		return wait(2000);
+			// 	})
+			// 	.then(() => {
+			// 		// 隐藏广告
+			// 		$ad.classList.add("none");
+			// 	})
+			// 	.catch((err) => {
+			// 		console.log(err);
+			// 	});
+
+			// 3--async/await
+			function wait(ms) {
+				return new Promise((resolve) => {
+					setTimeout(resolve, ms);
+				});
+			}
+
+			async function ad() {
+				await wait(1000);
+				// 显示广告
+				$ad.classList.remove("none");
+
+				await wait(2000);
+				// 隐藏广告
+				$ad.classList.add("none");
+			}
+
+			ad();
+		</script>
+	</body>
+</html>

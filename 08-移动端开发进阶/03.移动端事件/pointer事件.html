@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>单指拖拽</title>
+
+		<style>
+			.box {
+				width: 200px;
+				height: 200px;
+				background-color: blueviolet;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" class="box"></div>
+	</body>
+
+	<script>
+		// Pointer 事件类型
+		//      pointerover	        当定点设备进入某个元素的命中检测 范围时触发。
+		//      pointerenter	    当定点设备进入某个元素或其子元素的命中检测范围时，或做为某一类不支悬停（hover）状态的设备所触发的 poinerdown 事件的后续事件时所触发。（详情可见 pointerdown 事件类型）。
+		//      pointerdown	        当某指针得以激活时触发。
+		//      pointermove	        当某指针改变其坐标时触发。
+		//      pointerup	        当某指针不再活跃时触发。
+		//      pointercancel	    当浏览器认为某指针不会再生成新的后续事件时触发（例如某设备不再活跃）
+		//      pointerout	        可能由若干原因触发该事件，包括：定位设备移出了某命中检测的边界；不支持悬浮状态的设备发生 pointerup 事件（见 pointerup 事件）；作为 pointercancel 事件的后续事件（见 pointercancel 事件）；当数位板检测到数位笔离开了悬浮区域时。
+		//      pointerleave	    当定点设备移出某元素的命中检测边界时触发。对于笔形设备来说，当数位板检测到笔移出了悬浮范围时触发。
+		//      gotpointercapture	当某元素接受到一个指针捕捉时触发。
+		//      lostpointercapture	当针对某个指针的指针捕捉得到释放时触发。
+
+		// Pointer 注意事项
+		//      直接继承鼠标事件，处理 pointer 事件和处理鼠标事件几乎一致。
+		//      PC 端和移动端都会触发。
+		//      触摸点移出目标元素, touchmove 事件依然会持续触发, pointermove 和 mousemove 事件不会再触发。
+
+		// Pointer 事件对象
+		//      pointerId           对于某个由指针引起的事件的唯一标识。
+		//      target              返回一个元素节点，代表触摸发生时所在的那个元素节点。
+		//      pointerType         指针类型（鼠标/笔/触摸）
+		//      screenX 和 screenY  指针相对于屏幕左边缘的 x/y 坐标
+		//      clientX 和 clienY   指针相当于可视区域左边缘的 x/y 坐标
+		//      pageX 和 pageY      指针相对于 HTML 文档左边缘的 x/y 坐标，包含滚动位移。
+
+		// 阻止浏览器默认行为
+		//      preventDefault() 无效
+		//      使用 touch-action 指定哪些触摸事件由浏览器处理
+
+		if ("onpointermove" in window) {
+			console.log("支持 pointer 事件");
+		}
+
+		const $box = document.getElementById("box");
+
+		function drag($el) {
+			// 每次拖拽开始的触摸点
+			const startPoint = {};
+			// 拖拽过程中移动到的点
+			const movePoint = {};
+			// 被拖动元素的当前位置
+			const currentPosition = {
+				x: 0,
+				y: 0,
+			};
+
+			$el.addEventListener("pointerdown", startHandler, false);
+			$el.addEventListener("pointerup", endHandler, false);
+
+			// 使用touch 清除浏览器默认行为
+			$el.addEventListener(
+				"touchstart",
+				(event) => {
+					event.preventDefault();
+				},
+				false
+			);
+
+			function startHandler(event) {
+				startPoint.x = event.pageX;
+				startPoint.y = event.pageY;
+
+				document.addEventListener("pointermove", moveHandler, false);
+				document.addEventListener("pointerend", endHandler, false);
+				document.addEventListener("pointercancel", endHandler, false);
+			}
+
+			function moveHandler(event) {
+				// 移动坐标 = 当前坐标 + 移动量
+				movePoint.x = currentPosition.x + event.pageX - startPoint.x;
+				movePoint.y = currentPosition.y + event.pageY - startPoint.y;
+
+				$el.style.transform = `translate3d(${movePoint.x}px,${movePoint.y}px,0)`;
+			}
+
+			function endHandler() {
+				currentPosition.x = movePoint.x;
+				currentPosition.y = movePoint.y;
+
+				document.removeEventListener("pointermove", moveHandler, false);
+				document.removeEventListener("pointerend", endHandler, false);
+				document.removeEventListener("pointercancel", endHandler, false);
+			}
+		}
+
+		drag($box);
+	</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var length = 10;
+        var list = new Array();
+
+        while (list.length != length) {
+            list.push(parseInt(Math.random() * 100 + 1));
+        }
+
+        list.sort(function (a, b) {
+            return (a > b) ? 1 : -1;
+        });
+
+        var max_1 = Math.max.apply(this, list);
+        var min_1 = Math.min.apply(this, list);
+
+        var max_2 = list[list.length - 1];
+        var min_2 = list[0];
+
+        alert(
+            "生成的数组(排序后)：" + list + "\n" +
+            "最大值-1：" + max_1 + "\n" +
+            "最小值-1：" + min_1 + "\n" +
+            "最大值-2：" + max_2 + "\n" +
+            "最小值-2：" + min_2 + "\n"
+        );
+    </script>
+</body>
+
+</html>

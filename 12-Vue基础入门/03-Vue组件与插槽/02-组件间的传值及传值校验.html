@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					message: 347,
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {},
+			// 根组件
+			template: `
+				<div>
+					{{message}}
+                    <demo content="静态形式" />
+                    <demo :content="'动态形式' + message" />
+					<demo :content="message" />
+				</div>
+			`,
+		});
+
+		/**
+		 * props 是一种用于父组件向子组件传递数据的机制
+		 * 通过在子组件中声明 props，可以让父组件将数据传递给子组件，从而实现组件之间的通信
+		 * 有 静态 和 动态（v-bind）形式的传参
+		 **/
+		app.component('demo', {
+			// 传值校验
+			props: {
+				content: {
+					// 类型
+					type: Number,
+					// 是否必需
+					required: true,
+					// 默认值
+					default: 124,
+					// 验证器
+					validator: function (value) {
+						return value < 100;
+					},
+				},
+			},
+			template: `
+                <div>{{content}}</div>
+            `,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

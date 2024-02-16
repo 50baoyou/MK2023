@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>边框</title>
+    <style>
+        /*补充代码*/
+        .box {
+            overflow: hidden;
+            width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .bd1,
+        .bd2 {
+            border: 200px solid transparent;
+            border-radius: 200px;
+        }
+
+        .bd1 {
+            float: left;
+            border-left-color: red;
+        }
+
+        .bd2 {
+            float: right;
+            border-right-color: red;
+            position: absolute;
+            top: 0px;
+            left: -50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="bd1"></div>
+        <div class="bd2"></div>
+    </div>
+</body>
+
+</html>

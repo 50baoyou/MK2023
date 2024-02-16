@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			const app = Vue.createApp({
+				// 数据
+				data() {
+					return {
+						message: 'hello world',
+						num: 1,
+					};
+				},
+				// 侦听器
+				watch: {},
+				// 计算属性
+				computed: {},
+				// 方法
+				methods: {
+					// 注意 $event 只在模板中可用，而在 JavaScript 中是无法访问的。
+					handleClick(str, event) {
+						this.message = str;
+						console.log(event.target);
+					},
+					handleOne() {
+						alert('事件1');
+					},
+					handleTwo() {
+						alert('事件2');
+					},
+					handleDiv() {
+						alert('div click');
+					},
+				},
+				template: `
+					<div>{{message}}</div>
+                    <button v-on:click="handleClick('$event 是一个特殊的变量，它代表当前触发的事件对象。',$event)">按钮1</button>
+                    
+                    <div>{{num}}</div>
+                    <button v-on:click="num+=1">按钮2</button>
+                    
+                    <div>绑定多个函数需要加括号</div>
+                    <button v-on:click="handleOne(),handleTwo()">按钮3</button>
+                    
+                    <div v-on:click="handleDiv">
+                        使用 .stop 阻止事件冒泡
+                        <button v-on:click.stop="handleOne()">按钮4</button>
+                    </div>
+
+                    <div v-on:click="handleDiv">
+                        使用 .self 用于限制事件只能在触发事件的元素上触发，而不是在其子元素上触发
+                        <button v-on:click.stop="handleOne()">按钮4</button>
+                    </div>
+
+                    <div>
+                        .prevent: 用于阻止默认行为 <br/>
+                        .capture: 事件捕获，即从外向内触发事件 <br/>
+                        .once: 只触发一次事件 <br/>
+                        .passive: 告诉浏览器该事件不会调用 preventDefault()，可以提高页面滚动的性能 <br/>
+                        .native: 监听组件根元素的原生事件 <br/>
+                        .sync: 实现双向绑定，即将父组件中的数据同步到子组件中 <br/>
+                        .exact: 要求精确匹配修饰符，即只有在修饰符完全匹配时才触发事件 <br/>
+                        如果要同时使用 .capture 和 .once 修饰符，应该这样写：@click.capture.once="handleClick" <br/>
+
+                        使用顺序 .capture .once .passive .self .native .exact
+                    </div>
+
+                    <div>
+                        按键修饰符{{num}}
+                        <input @keydown.enter="num+=1"/>
+                    </div>
+
+                    <div>
+                        精确修饰符{{num}}
+                        <input @click.ctrl.left.exact="num+=1"/>
+                    </div>
+                `,
+				/**
+				 * 按键修饰符
+				 * 除了 .enter，Vue 还支持其他常用的按键修饰符，如 .tab、.delete、.esc、.space 等等。
+				 * 如果你想监听自定义的按键，可以使用 Vue 的 v-on:keyup.keyCode 语法，其中 keyCode 是按键的键码值。
+				 **/
+
+				/**
+				 * 鼠标修饰符
+				 * 如果需要添加鼠标修饰符，可以在事件名后面加上 . 操作符，然后再加上修饰符，例如 @click.right 表示右键点击事件。
+				 * 常用的鼠标修饰符包括 .left、.right、.middle、.ctrl、.alt、.shift 和 .meta。
+				 *
+				 * 同时，可以使用 精确修饰符 .exact 修饰符来确保只有完全匹配才触发事件。例如 @click.left.exact="onClick" 表示只有左键点击才会触发 onClick 方法。
+				 **/
+			});
+
+			const vm = app.mount('#root');
+		</script>
+	</body>
+</html>

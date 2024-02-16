@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.header {
+				position: absolute;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 数据
+			data() {
+				return {
+					message: 'hello world!',
+				};
+			},
+			// 局部注册
+			components: {},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {
+					console.log('handleClick 覆盖混入中的方法');
+				},
+			},
+			// mounted() {
+			// 	this.$refs.input.focus();
+			// },
+			// 局部定义自定义指令
+			// directives: {
+			// 	// 在模板中启用 v-focus
+			// 	focus,
+			// },
+			// 根组件
+			template: `
+				<div>
+                    <div v-pos:left="100" class="header">
+                        {{message}}
+                        <input v-focus />
+                    </div>
+                </div>
+			`,
+		});
+
+		// 局部自定义指令
+		const focus = {
+			mounted: (el) => el.focus(),
+		};
+
+		// 全局注册自定义指令 directive
+		app.directive('focus', {
+			mounted(el) {
+				el.focus();
+			},
+		});
+
+		// app.directive('pos', {
+		// 	mounted(el, bind) {
+		// 		el.style.top = `${bind.value}px`;
+		// 	},
+		// 	updated(el, bind) {
+		// 		el.style.top = `${bind.value}px`;
+		// 	},
+		// });
+		// 当自定义一个指令中只有 mounted 和 updated 时，可简写
+		app.directive('pos', (el, bind) => {
+			el.style[bind.arg] = `${bind.value}px`;
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

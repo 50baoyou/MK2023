@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 根组件
+			template: `
+				<div>
+                    <input v-model="inputValue" type="text" placeholder="input data" />
+                    <button @click="handleClick">提交</button>
+                    <ul>
+                        <li v-for="item in list" :key="item">{{item}}</li>
+                    <ul>
+                </div>
+			`,
+			// 组合式 API 的入口
+			setup(props, context) {
+				const { ref, reactive } = Vue;
+
+				const inputValue = ref('');
+				const list = reactive([1, 3, 5, 347, 443]);
+
+				const handleClick = () => {
+					if (inputValue.value) {
+						list.push(parseInt(inputValue.value));
+						inputValue.value = '';
+					}
+				};
+
+				return {
+					inputValue,
+					list,
+					handleClick,
+				};
+			},
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

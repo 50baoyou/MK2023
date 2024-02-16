@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 根组件
+			template: `
+				<div @click="handleClick">{{name}}</div>
+			`,
+			// created 实例被完全初始化之前执行
+			setup(props, context) {
+				return {
+					name: 'xk',
+					handleClick() {
+						alert(123);
+					},
+				};
+			},
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Flex 圣杯布局</title>
+
+		<style>
+			/* 
+                Flex 容器的属性
+                    flex-direction      主轴的方向（即项目的排列方向）。    row | row-reverse | column | column-reverse
+                    flex-wrap           定义如果一条轴线排不下，如何换行。  nowrap | wrap | wrap-reverse
+                    flex-flow           前两个属性的简写形式，默认值为 row nowrap。 
+                    justify-content     项目在主轴上的对齐方式。    flex-start | flex-end | center | space-between | space-around
+                    align-items         项目在交叉轴上如何对齐。    flex-start | flex-end | center | baseline | stretch;
+                    align-content       多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+            */
+
+			/*
+				Flex 项目的属性
+					order			项目的排列顺序。数值越小，排列越靠前，默认为0。
+					flex-grow		项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
+					flex-shrink		项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+					flex-basis		在分配多余空间之前，项目占据的主轴空间。
+					flex			是 flex-grow, flex-shrink 和 flex-basis的简写
+					align-self		允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。
+            */
+
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			body {
+				display: flex;
+				flex-direction: column;
+				height: 100vh;
+				font-size: 24px;
+			}
+
+			.header-layout {
+				height: 80px;
+				background-color: red;
+			}
+
+			.footer-layout {
+				height: 80px;
+				background-color: yellow;
+			}
+
+			.body-layout {
+				display: flex;
+				flex-grow: 1;
+			}
+
+			.main-layout {
+				flex-grow: 1;
+				background-color: gray;
+			}
+
+			.nav-layout {
+				order: -1;
+				width: 200px;
+				background-color: green;
+			}
+
+			.aside-layout {
+				width: 200px;
+				background-color: blue;
+			}
+
+			.flex-center {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="header-layout flex-center">头部</header>
+
+		<div class="body-layout">
+			<main class="main-layout flex-center">主体部分</main>
+			<nav class="nav-layout flex-center">导航</nav>
+			<aside class="aside-layout flex-center">侧栏</aside>
+		</div>
+
+		<footer class="footer-layout flex-center">底部</footer>
+	</body>
+</html>

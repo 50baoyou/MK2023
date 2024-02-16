@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+    </div>
+
+    <script>
+        const box = document.getElementById("box");
+
+        const createElement = (nodeName = "div",
+            { className = "default", content = "default" } = {}) => {
+            let node = null;
+            node = document.createElement(nodeName);
+            node.className = className;
+            node.innerText = content;
+
+            return node;
+        }
+
+        box.appendChild(createElement());
+        box.appendChild(createElement("h1"));
+        box.appendChild(createElement("a", { content: "慕课网" }));
+        box.appendChild(createElement("p", { className: "demo", content: "测试" }));
+    </script>
+</body>
+
+</html>

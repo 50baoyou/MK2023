@@ -1,0 +1,31 @@
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.header-layout {
+	flex-shrink: 0;
+	width: 100vw;
+	height: 12.8vw /* 96px -> 12.8vw */;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.main-layout {
+	overflow: auto;
+	flex-grow: 1;
+}
+
+.slider-layout {
+	margin-bottom: 20px;
+}
+
+.course-layout {
+	margin-bottom: 10px;
+}
+
+.tabbar-layout {
+	flex-shrink: 0;
+	width: 100vw;
+	height: 12.8vw /* 96px -> 12.8vw */;
+}

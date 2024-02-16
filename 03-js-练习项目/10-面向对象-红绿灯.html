@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="box">
+
+    </div>
+
+    <script>
+        // 得到DOM元素
+        var box = document.getElementById("box");
+
+        // 红绿灯类
+        function TrafficLight() {
+            // 颜色属性 1：红色，2：黄色，3：绿色
+            this.color = 1;
+            // DOM属性
+            this.dom = null;
+
+            // 创建对象时调用初始化方法
+            this.init();
+
+            // 创建对象时绑定监听
+            this.addEvent();
+        }
+
+        // 在构造函数的原型上添加方法
+        TrafficLight.prototype.init = function () {
+            this.dom = document.createElement("img");
+            this.dom.src = "images/" + this.color + ".jpg";
+            box.appendChild(this.dom);
+        };
+
+        TrafficLight.prototype.addEvent = function () {
+            // 备份上下文,这里的this指向JS的实例对象
+            var self = this;
+
+            this.dom.onclick = function () {
+                self.changeColor();
+            }
+        };
+
+        TrafficLight.prototype.changeColor = function () {
+            this.color = (this.color == 3) ? 1 : ++this.color;
+            this.dom.src = "images/" + this.color + ".jpg";
+        };
+
+        var light_1 = new TrafficLight();
+        var light_2 = new TrafficLight();
+        var light_3 = new TrafficLight();
+
+        console.log(window.color);
+    </script>
+</body>
+
+</html>

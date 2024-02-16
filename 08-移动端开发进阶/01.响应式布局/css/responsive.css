@@ -1,0 +1,44 @@
+/* 576px 768px 992px 1200px */
+.course-item {
+	width: 100%;
+}
+
+@media screen and (min-width: 576px) {
+	.course-item {
+		width: 50%;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.course-item {
+		width: 33.3333%;
+	}
+
+	.header-toggle {
+		display: none;
+	}
+
+	.nav-layout {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		position: static;
+		height: 100%;
+	}
+
+	.nav-list {
+		display: flex;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.course-item {
+		width: 25%;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.course-item {
+		width: 16.6666%;
+	}
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+
+    </div>
+
+    <script>
+        const box = document.getElementById("box");
+
+        const showData = list => {
+            let p = document.createElement("p");
+            p.innerText = list;
+            box.appendChild(p);
+        };
+
+        const defaultArr = [1, 1, "1", 17, true, true, false, false, "true", "a", {}, {}];
+
+        const arr_1 = [...new Set(defaultArr)].join();
+
+        const arr_2 = defaultArr.reduce((pre, cur) => {
+            return pre.includes(cur) ? pre : [...pre, cur];
+        }, []);
+
+        const arr_3 = defaultArr.filter((cur, index) => {
+            return defaultArr.indexOf(cur) === index;
+        });
+
+        showData(arr_1);
+        showData(arr_2);
+        showData(arr_3);
+    </script>
+</body>
+
+</html>

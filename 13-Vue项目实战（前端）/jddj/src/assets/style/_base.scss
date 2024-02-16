@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'PingFangSC-Regular';
+    src: url('../fonts/PingFangSC-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'AlimamaFangYuanTiVF-Thin';
+    src: url('../fonts/AlimamaFangYuanTiVF-Thin.ttf') format('truetype'),
+        url('../fonts/AlimamaFangYuanTiVF-Thin.woff') format('woff'),
+        url('../fonts/AlimamaFangYuanTiVF-Thin.woff2') format('woff2');
+}
+
+html {
+    font-size: 26.666667vw;
+    font-family: 'AlimamaFangYuanTiVF-Thin', 'PingFangSC-Regular', 'Microsoft Yahei', sans-serif;
+
+    color: $font-color;
+}
+
+body {
+    min-width: 3.75rem;
+    min-height: 6.67rem;
+
+    font-size: 0.16rem;
+}
+
+input {
+    outline: none;
+}

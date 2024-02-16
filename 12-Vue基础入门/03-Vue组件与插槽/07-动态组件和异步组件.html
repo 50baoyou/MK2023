@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					message: 'hello world!',
+					currentItem: 'box-input',
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {
+					if (this.currentItem === 'box-item') {
+						this.currentItem = 'box-input';
+					} else {
+						this.currentItem = 'box-item';
+					}
+				},
+			},
+			// 根组件
+
+			/**
+			 * 动态组件
+			 * 通过在<component>标签上绑定一个is属性，来指定要渲染的组件
+			 **/
+			template: `
+				<div>
+					{{message}} 
+                    <p>keep-alive 是一个抽象组件，用于缓存动态组件或组件树。它可以在组件切换时保留组件状态或避免重新渲染。</p>
+                    
+                    <keep-alive>
+                        <component :is="currentItem" />
+                    </keep-alive>
+
+                    <button @click="handleClick">切换</button>
+
+                    <async-common-item />
+                </div>
+			`,
+		});
+
+		app.component('box-input', {
+			template: `
+                <div>
+                    <input type="text" />
+                </div>
+            `,
+		});
+
+		app.component('box-item', {
+			template: `
+                <div>
+                    <p>xk</p>
+                </div>
+            `,
+		});
+
+		/**
+		 * 异步组件
+		 * 将组件拆分应用为更小的块，并仅在需要时再从服务器加载相关组件
+		 **/
+		app.component(
+			'async-common-item',
+			Vue.defineAsyncComponent(() => {
+				return new Promise((resolve, reject) => {
+					setTimeout(() => {
+						resolve({
+							template: `<div>异步加载组件</div>`,
+						});
+					}, 3000);
+				});
+			})
+		);
+
+		const vm = app.mount('#root');
+	</script>
+</html>

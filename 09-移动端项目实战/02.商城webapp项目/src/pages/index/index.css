@@ -1,0 +1,51 @@
+.index-layout {
+	overflow-y: auto;
+
+	height: 100%;
+}
+
+.header-layout {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+
+	width: 100%;
+	height: 14.4vw /* 54px -> 14.4vw */;
+}
+
+.header-layout .searchbox {
+	width: 89.3333vw /* 335px -> 89.3333vw */;
+}
+
+.slider-layout,
+.nav-layout,
+.product-layout {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: #fff;
+}
+
+.slider-layout {
+	height: 48vw /* 180px -> 48vw */;
+}
+
+.nav-layout {
+	margin-bottom: 2.6667vw /* 20px -> 2.6667vw */;
+	height: 56.1333vw /* 210.5px -> 56.1333vw */;
+}
+
+.product-layout {
+	margin-bottom: 15.4667vw /* 58px -> 15.4667vw */;
+}
+
+.tabbar-layout {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+
+	width: 100%;
+}

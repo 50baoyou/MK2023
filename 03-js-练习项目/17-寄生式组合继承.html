@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Student.prototype = new People(); 用以下代码替换
+        function inheritPrototype(subType, superType) {
+            subType.prototype = Object.create(superType.prototype);
+        }
+
+        inheritPrototype(Student, People);
+
+        function People(name, age) {
+            this.name = name;
+            this.age = age;
+        };
+
+        function Student(name, age, num) {
+            this.People.apply(this, [name, age]);
+            this.num = num;
+        }
+
+        // 寄生式组合继承少调用一次Student.prototype = new People();
+        Student.prototype = Object.create(People);
+    </script>
+</body>
+
+</html>

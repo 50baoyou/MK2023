@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .carousel {
+            position: relative;
+            width: 650px;
+            height: 360px;
+            border: 1px solid black;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .carousel ul {
+            position: relative;
+            width: 5000px;
+            left: 0;
+            list-style-type: none;
+            transition: left .6s ease 0s;
+        }
+
+        .carousel ul li {
+            float: left;
+            width: 650px;
+            height: 360px;
+            line-height: 360px;
+            font-size: 200px;
+            text-align: center;
+            color: whitesmoke;
+            background-color: wheat;
+        }
+
+        .carousel a {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            margin-top: -25px;
+            border-radius: 50%;
+            background-color: gold;
+        }
+
+        .carousel a.left-btn {
+            left: 20px;
+        }
+
+        .carousel a.right-btn {
+            right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <ul id="list">
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <a href="javascript:;" id="left-btn" class="left-btn"></a>
+        <a href="javascript:;" id="right-btn" class="right-btn"></a>
+    </div>
+
+    <script>
+        var left_btn = document.getElementById('left-btn');
+        var right_btn = document.getElementById('right-btn');
+        var list = document.getElementById('list');
+
+        //克隆第一页
+        list.appendChild(list.firstElementChild.cloneNode(true));
+
+        // 记录页数
+        var num = 0;
+        // 节流锁
+        var lock = true;
+
+        left_btn.onclick = function () {
+            if (!lock) {
+                return;
+            }
+            lock = false;
+
+            // 当页数为0时，瞬间拉到第5页
+            if (num == 0) {
+                list.style.transition = 'none';
+                list.style.left = -5 * 650 + 'px';
+                num = 5;
+                // 使用延时器实现过渡效果瞬间取消再加上，使翻到第4页有过渡效果
+                setTimeout(function () {
+                    list.style.transition = 'left .6s ease 0s';
+                    num = 4;
+                    list.style.left = -num * 650 + 'px';
+                }, 1);
+            } else {
+                num--;
+                list.style.left = -num * 650 + 'px';
+            }
+
+            setTimeout(function () {
+                lock = true;
+            }, 600);
+        }
+
+        right_btn.onclick = function () {
+            if (!lock) {
+                return;
+            }
+            lock = false;
+
+            list.style.transition = 'left .6s ease 0s';
+            num++;
+            if (num > 4) {
+                // 设置延时器，当过渡效果结束后，瞬间拉回第一页
+                setTimeout(function () {
+                    // 取消过渡效果
+                    list.style.transition = 'none';
+                    list.style.left = 0;
+                    num = 0
+                }, 600);
+            }
+            list.style.left = -num * 650 + 'px';
+
+            setTimeout(function () {
+                lock = true;
+            }, 600);
+        }
+    </script>
+</body>
+
+</html>

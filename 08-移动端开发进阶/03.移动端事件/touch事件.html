@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>单指拖拽</title>
+
+		<style>
+			.box {
+				width: 200px;
+				height: 200px;
+				background-color: blueviolet;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" class="box"></div>
+	</body>
+
+	<script>
+		// Touch 事件类型
+		// 		touchstart：用户开始触摸时触发
+		// 		touchend：用户不再接触触摸屏时
+		// 		touchmove：用户移动触摸点时触发
+		// 		touchcancel：触摸点取消时触发
+
+		// TouchEvent 接口
+		// 		touches：所有的当前处于活跃状态的触摸点
+		// 		targetTouches：所有处在触摸的目标元素节点内部、且仍然处于活动状态的触摸点
+		// 		changedTouches：本次触摸事件的相关触摸点
+
+		// Touch 实例属性
+		// 		identifier：触摸点的唯一 ID。
+		// 		target：返回一个元素节点，代表触摸发生时所在的那个元素节点
+		// 		force：返回一个0到1之间的数值，表示触摸压力
+		// 		Touch.screenX和Touch.screenY：触摸点相对于屏幕左上角的横坐标和纵坐标，与页面是否滚动无关
+		// 		Touch.clientX和Touch.clientY：触摸点相对于浏览器视口左上角的横坐标和纵坐标，与页面是否滚动无关
+		// 		Touch.pageX和Touch.pageY：触摸点相对于当前页面左上角的横坐标和纵坐标，包含了页面滚动带来的位移
+		// 		Touch.radiusX和Touch.radiusY：返回触摸点周围受到影响的椭圆范围的 X 轴半径和 Y 轴半径，单位为像素
+		// 		Touch.rotationAngle：触摸区域的椭圆的旋转角度，单位为度数，在0到90度之间
+
+		// 阻止浏览器的鼠标事件默认行为
+		// 		preventDefault()
+		// 		touch-action 指定哪些触摸事件由浏览器处理
+
+		if ("ontouchstart" in window) {
+			console.log("支持 touchstart 事件");
+		}
+
+		const $box = document.getElementById("box");
+
+		function drag($el) {
+			// 每次拖拽开始的触摸点
+			const startPoint = {};
+			// 拖拽过程中移动到的点
+			const movePoint = {};
+			// 被拖动元素的当前位置
+			const currentPosition = {
+				x: 0,
+				y: 0,
+			};
+
+			$el.addEventListener("touchstart", startHandler, false);
+			$el.addEventListener("touchmove", moveHandler, false);
+			// touchend,touchcancel 当其中一个事件触发时，另一个不会触发
+			$el.addEventListener("touchend", endHandler, false);
+			$el.addEventListener("touchcancel", endHandler, false);
+
+			function startHandler(event) {
+				event.preventDefault();
+
+				const touch = event.changedTouches[0];
+
+				startPoint.x = touch.pageX;
+				startPoint.y = touch.pageY;
+			}
+
+			function moveHandler(event) {
+				const touch = event.changedTouches[0];
+
+				// 移动坐标 = 当前坐标 + 移动量
+				movePoint.x = currentPosition.x + touch.pageX - startPoint.x;
+				movePoint.y = currentPosition.y + touch.pageY - startPoint.y;
+
+				$el.style.transform = `translate3d(${movePoint.x}px,${movePoint.y}px,0)`;
+			}
+
+			function endHandler() {
+				currentPosition.x = movePoint.x;
+				currentPosition.y = movePoint.y;
+			}
+		}
+
+		drag($box);
+	</script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// plugin 插件
+		/**
+		 * 插件 (Plugins) 是一种能为 Vue 添加全局功能的工具代码。
+		 * 插件没有严格定义的使用范围，但是插件发挥作用的常见场景主要包括以下几种：
+		 *
+		 * 通过 app.component() 和 app.directive() 注册一到多个全局组件或自定义指令。
+		 * 通过 app.provide() 使一个资源可被注入进整个应用。
+		 * 向 app.config.globalProperties 中添加一些全局实例属性或方法
+		 * 一个可能上述三种都包含了的功能库 (例如 vue-router)。
+		 **/
+		const myPlugin = {
+			install(app, options) {
+				app.provide('name', 'xk');
+				// 扩展全局属性
+				app.config.globalProperties.$sayHello = '347';
+			},
+		};
+
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 数据
+			data() {
+				return {};
+			},
+			// 局部注册
+			components: {},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {},
+			},
+			// 根组件
+			template: `
+				<demo />
+			`,
+		});
+
+		app.component('demo', {
+			inject: ['name'],
+			template: `
+                <div>
+                    hello world! {{name}}{{this.$sayHello}}
+                </div>
+            `,
+		});
+
+		// 使用插件
+		app.use(myPlugin, { name: 'xk' });
+
+		const vm = app.mount('#root');
+	</script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			const app = Vue.createApp({
+				// 数据
+				data() {
+					return {
+						message: 'hello world',
+						listArray: ['xk', 'xf', '443', '347'],
+						listObject: {
+							name: 'xl',
+							age: '30',
+							tag: '347',
+						},
+					};
+				},
+				// 侦听器
+				watch: {},
+				// 计算属性
+				computed: {},
+				// 方法
+				methods: {
+					handleClickAddBtn() {
+						this.listArray.push('new value');
+					},
+				},
+				/**
+				 * v-for 指令用于循环渲染列表数据。
+				 * 当 Vue 重新渲染列表时，它会尽可能地复用已经存在的元素，而不是从头开始重新渲染。
+				 * 为了实现这个优化，Vue 需要跟踪每个节点的标识符，这就是 key 的作用。
+				 *
+				 * key 是一个特殊的属性，用于给每个节点设置唯一的标识符。
+				 * 当 Vue 重新渲染列表时，它会根据 key 的值来判断哪些节点是需要更新的，哪些是需要新增的，哪些是需要删除的。
+				 * 如果没有设置 key，Vue 会使用默认的节点标识方式，这可能会导致一些不必要的性能问题。
+				 **/
+
+				// 使用 v-for 当需要渲染多个元素时，可以使用 template 标签来包裹这些元素，
+				// 以便在 v-for 指令中使用。这样可以避免在渲染多个元素时产生多余的标签，同时也可以提高代码的可读性和维护性。
+				template: `
+					<div>{{message}}</div>
+
+                    <div>
+                        <ul>
+                            <li v-for="(item,index) in listArray" :key="index+123">{{index}}---{{item}}</li>
+                        </ul>
+                        <button v-on:click="handleClickAddBtn">新增</button>
+                    </div>
+
+                    <div>
+                        <div v-for="(value,key,index) in listObject">
+                            {{index}}--{{key}}: {{value}}
+                        </div>
+                    </div>
+
+                    <div>
+                        <template v-for="item in 10">{{item}}</template>
+                    </div>
+                `,
+			});
+
+			const vm = app.mount('#root');
+		</script>
+	</body>
+</html>

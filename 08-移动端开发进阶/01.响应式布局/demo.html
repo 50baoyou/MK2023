@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+
+		<style>
+			/* css reset */
+			* {
+				box-sizing: border-box;
+				padding: 0;
+				margin: 0;
+			}
+			body {
+				padding-top: 200px;
+			}
+			img {
+				width: 100%;
+			}
+			.row {
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.col {
+				padding-top: 10px;
+				padding-bottom: 10px;
+				background-color: rgba(86, 61, 124, 0.15);
+				border: 1px solid rgba(86, 61, 124, 0.2);
+			}
+		</style>
+
+		<style>
+			/* 
+                使用 flex、grid 布局可以实现设计时，可不使用媒体查询
+
+                Bootstrap 的断点
+                    超小屏  xs  <576px
+                    小屏    sm  ≥576px
+                    中屏    md  ≥768px
+                    大屏    lg  ≥992px
+                    超大屏  xl  ≥1200px
+                    超大pro xxl ≥1400px
+
+                媒体查询位置
+                    样式表（style 中、css 文件中）  --  推荐
+                    外链 link 中    --  不推荐
+             */
+
+			/* mobile first 移动端优先（推荐） */
+			/* 从小到大 */
+			.col {
+				width: 100%;
+			}
+			@media (min-width: 576px) {
+				.col {
+					width: 50%;
+				}
+			}
+			@media (min-width: 768px) {
+				.col {
+					width: 25%;
+				}
+			}
+			@media (min-width: 992px) {
+				.col {
+					width: 16.666667%;
+				}
+			}
+			@media (min-width: 1200px) {
+				.col {
+					width: 8.333333%;
+				}
+			}
+
+			/* PC first PC 端优先 */
+			/* 从大到小 */
+			/* .col {
+				width: 8.333333%;
+			}
+			@media (max-width: 1200px) {
+				.col {
+					width: 16.666667%;
+				}
+			}
+			@media (max-width: 992px) {
+				.col {
+					width: 25%;
+				}
+			}
+			@media (max-width: 768px) {
+				.col {
+					width: 50%;
+				}
+			}
+			@media (max-width: 576px) {
+				.col {
+					width: 100%;
+				}
+			} */
+		</style>
+	</head>
+	<body>
+		<div class="row">
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+			<div class="col">
+				<img src="images/1.png" alt="" />
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,13 @@
+<div  class="tabbar">
+    <div class="tabbar-btn tabbar-btn-sm">
+        <i class="iconfont icon-kefu"></i>
+            咨询
+    </div>
+
+    <div class="tabbar-btn tabbar-btn-sm">
+        <i class="iconfont icon-aixin"></i>
+            收藏
+    </div>
+
+    <div class="tabbar-btn tabbar-btn-l">立即预订</div>
+</div>

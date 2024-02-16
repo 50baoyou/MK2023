@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					message: 'hello world!',
+					text: '提交',
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick(msg) {},
+			},
+			// 根组件
+			/**
+			 * 插槽 slot
+			 * 为子组件传递一些模板片段（插槽内容），让子组件在它们的组件中渲染这些片段
+			 * 插槽内容中使用的是父组件的作用域中的数据
+			 *
+			 * 具名插槽
+			 * 为具名插槽传入内容，需要使用一个含 v-slot 指令的 <template> 元素，并将目标插槽的名字传给该指令
+			 **/
+			template: `
+				<div>
+					{{message}}
+
+					<demo>
+                        <div>{{text}}</div>
+                    </demo>
+                    
+                    <demo>
+                        <button>{{text}}</button>
+                    </demo>
+                    
+                    <demo />
+
+                    <layout>
+                        <template #header>
+                            <div>header</div>
+                        </template>
+                        <template #footer>
+                            <div>footer</div>
+                        </template>
+                    </layout>
+
+                    <list v-slot="slotProps">
+                        <div>{{slotProps.item}}</div>
+                    </list>
+			`,
+		});
+
+		/**
+		 * <slot> 元素是一个插槽出口 (slot outlet)，标示了父元素提供的插槽内容 (slot content) 将在哪里被渲染。
+		 * <slot> 元素不能绑定事件
+		 *
+		 * <slot name=""> 带 name 的插槽被称为具名插槽 (named slots)
+		 **/
+		app.component('demo', {
+			props: [],
+			methods: {
+				handleClick() {
+					alert(123);
+				},
+			},
+			template: `
+				<div >
+                    <input />
+                    <span @click="handleClick">
+                        <slot>
+                            <button>未传递插槽内容时，使用 slot 中的内容</button>
+                        </slot>
+                    </span>
+                </div>
+			`,
+		});
+
+		app.component('layout', {
+			template: `
+                <div>
+                    <slot name="header"></slot>
+                    <div>content</div>
+                    <slot name="footer"></slot>
+                </div>
+            `,
+		});
+
+		/**
+		 * 作用域插槽
+		 * 让子组件在渲染时将一部分数据提供给插槽
+		 * 通过子组件标签上的 v-slot 指令，接收到插槽 props 对象
+		 **/
+		app.component('list', {
+			data() {
+				return {
+					list: [1, 2, 3, 4, 5],
+				};
+			},
+			template: `
+                <div>
+                    <slot v-for="item in list" :item="item"></slot>
+                </div>
+            `,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

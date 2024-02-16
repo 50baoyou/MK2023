@@ -1,0 +1,25 @@
+@mixin ipad($height) {
+	@media screen and (min-width: 768px) {
+		height: $height;
+		// 在 mixin 中作为一个占位符，用于表示 mixin 被调用时所包含的样式规则
+		@content;
+	}
+}
+
+.header {
+	width: 1000px;
+
+	@include ipad(200px) {
+		// 传入一个 @content 块
+		width: 500px;
+	}
+}
+
+.footer {
+	color: blueviolet;
+
+	@include ipad(100px) {
+		// 传入一个 @content 块
+		color: blue;
+	}
+}

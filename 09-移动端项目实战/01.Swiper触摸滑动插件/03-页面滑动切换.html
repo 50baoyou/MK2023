@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+
+		<link rel="stylesheet" href="./js/swiper-bundle.min.css" />
+
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			.swiper {
+				width: 100vw;
+				height: 100vh;
+			}
+			.swiper-slide {
+				overflow: hidden;
+				position: relative;
+				display: flex;
+				justify-content: center;
+			}
+			.logistics-slide {
+				background-color: #57cfe1;
+			}
+			.purchase-slide {
+				background-color: #fe8e34;
+			}
+			.logistics-text,
+			.purchase-text {
+				position: absolute;
+				width: 214px;
+				opacity: 0;
+				transition: all 1s 0.5s;
+			}
+			.logistics-text-active,
+			.purchase-text-active {
+				opacity: 1;
+			}
+			.logistics-text {
+				top: 50px;
+			}
+			.purchase-text {
+				bottom: 40px;
+			}
+			.logistics-phone,
+			.logistics-person,
+			.purchase-phone,
+			.purchase-person {
+				position: absolute;
+				width: 180px;
+				transition: all 0.5s;
+			}
+			.logistics-phone {
+				bottom: 0;
+				transform: translate3d(-1000px, 0, 0);
+			}
+			.logistics-phone-active {
+				transform: translate3d(-70px, 0, 0);
+			}
+			.logistics-person {
+				bottom: 0;
+				transform: translate3d(1000px, 0, 0);
+			}
+			.logistics-person-active {
+				transform: translate3d(70px, 0, 0);
+			}
+			.purchase-person {
+				top: 50px;
+				transform: translate3d(-70px, -1000px, 0);
+			}
+			.purchase-person-active {
+				top: 50px;
+				transform: translate3d(-70px, 0, 0);
+			}
+			.purchase-phone {
+				top: 120px;
+				transform: translate3d(70px, 1000px, 0);
+			}
+			.purchase-phone-active {
+				top: 120px;
+				transform: translate3d(70px, 0, 0);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="swiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide logistics-slide">
+					<img src="./img/logistics-phone.png" alt="" class="logistics-phone" id="logistics-phone" />
+					<img src="./img/logistics-person.png" alt="" class="logistics-person" id="logistics-person" />
+					<img src="./img/logistics-text.png" alt="" class="logistics-text" id="logistics-text" />
+				</div>
+				<div class="swiper-slide purchase-slide">
+					<img src="./img/purchase-phone.png" alt="" class="purchase-phone" id="purchase-phone" />
+					<img src="./img/purchase-person.png" alt="" class="purchase-person" id="purchase-person" />
+					<img src="./img/purchase-text.png" alt="" class="purchase-text" id="purchase-text" />
+				</div>
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
+
+		<script src="./js/swiper-bundle.min.js"></script>
+
+		<script>
+			const ids = [
+				["logistics-phone", "logistics-person", "logistics-text"],
+				["purchase-phone", "purchase-person", "purchase-text"],
+			];
+
+			const swiper = new Swiper(".swiper", {
+				//loop: true,
+				direction: "vertical",
+				speed: 400,
+				grabCursor: true,
+				mousewheel: true,
+				freeMode: true,
+
+				// 如果需要自动播放
+				autoplay: {
+					delay: 2000,
+					disableOnInteraction: false,
+				},
+
+				// 分页器
+				pagination: {
+					el: ".swiper-pagination",
+					clickable: true,
+				},
+
+				// 事件
+				on: {
+					init() {
+						imgEff();
+						// this.emit('slideChangeTransitionEnd'); 触发事件
+					},
+					slideChangeTransitionEnd() {
+						imgEff(this.activeIndex);
+
+						if (typeof this.previousIndex !== "undefined") {
+							for (const id of ids[this.previousIndex]) {
+								const $el = document.getElementById(id);
+								$el.classList.remove(`${id}-active`);
+							}
+						}
+					},
+				},
+			});
+
+			function imgEff(index = 0) {
+				for (const id of ids[index]) {
+					const $el = document.getElementById(id);
+					$el.classList.add(`${id}-active`);
+				}
+			}
+		</script>
+	</body>
+</html>

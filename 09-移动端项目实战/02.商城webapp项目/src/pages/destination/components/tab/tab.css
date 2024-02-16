@@ -1,0 +1,30 @@
+.tab {
+	overflow-y: auto;
+	height: 100%;
+}
+
+.tab-list {
+	width: 100%;
+}
+
+.tab-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 10.6667vw /* 40px -> 10.6667vw */;
+
+	font-size: 3.7333vw /* 14px -> 3.7333vw */;
+	line-height: 4.2667vw /* 16px -> 4.2667vw */;
+
+	color: #333;
+}
+
+.tab-item-active {
+	border-left: 2px solid #bf2a2f;
+
+	font-weight: bold;
+
+	color: #bf2a2f;
+	background-color: #fff;
+}

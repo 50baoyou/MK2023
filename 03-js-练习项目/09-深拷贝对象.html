@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 深拷贝函数 参数obj
+        function deepClone(obj) {
+            var result_data = null;
+
+            // 判断传入对象是数组还是对象 isArray()传入对象时为false
+            if (Array.isArray(obj)) {
+                // 数组
+                result_data = new Array();
+                for (var i = 0; i < obj.length; i++) {
+                    result_data.push(deepClone(obj[i]));
+                }
+
+            } else if (typeof obj == "object") {
+                // 对象
+                result_data = {};
+                for (var j in obj) {
+                    result_data[j] = deepClone(obj[j]);
+                }
+            } else {
+                // 基本类型
+                result_data = obj;
+            }
+
+            return result_data;
+        }
+
+        var obj = {
+            a: 111,
+            b: "xixi",
+            c: [1, ["a", "b"], 3, 4, 5, 6, 7]
+        };
+
+        var new_obj = deepClone(obj);
+
+        obj.ddd = "hello";
+
+        console.log(obj);
+        console.log(new_obj);
+
+        console.log(obj.b === new_obj.b);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+.detail-page {
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) 12.8vw;
+	grid-template-areas:
+		"info"
+		"tabbar";
+
+	width: 100%;
+	height: 100%;
+}
+
+.header-layout {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+
+	width: 100%;
+	height: 14.4vw /* 54px -> 14.4vw */;
+}
+
+.info-layout {
+	overflow-y: auto;
+
+	grid-area: info;
+}
+
+.info-layout .loading {
+	margin: 53.3333vw /* 200px -> 53.3333vw */ auto;
+}
+
+.tabbar-layout {
+	grid-area: tabbar;
+
+	background-color: brown;
+}

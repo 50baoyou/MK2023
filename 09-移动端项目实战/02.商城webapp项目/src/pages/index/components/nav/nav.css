@@ -1,0 +1,35 @@
+.nav {
+	display: flex;
+	flex-wrap: wrap;
+
+	padding-top: 9.2vw /* 34.5px -> 9.2vw */;
+	width: 100%;
+}
+
+.nav-item {
+	margin-bottom: 5.4667vw /* 20.5px -> 5.4667vw */;
+	width: 25%;
+}
+
+.nav-link {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	font-size: 3.2vw /* 12px -> 3.2vw */;
+
+	color: #999;
+}
+
+.nav-img {
+	display: block;
+
+	margin-bottom: 1.4667vw /* 5.5px -> 1.4667vw */;
+	width: 11.7333vw /* 44px -> 11.7333vw */;
+	height: 11.7333vw /* 44px -> 11.7333vw */;
+}
+
+.nav-img + span {
+	line-height: 4.5333vw /* 17px -> 4.5333vw */;
+}

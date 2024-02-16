@@ -1,0 +1,64 @@
+.tabbar {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+
+	padding: 2.1333vw 2.6667vw;
+	width: 100%;
+}
+
+.tabbar-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: relative;
+
+	font-size: 3.7333vw /* 14px -> 3.7333vw */;
+	line-height: 3.7333vw /* 14px -> 3.7333vw */;
+	letter-spacing: 0;
+}
+
+.tabbar-btn-sm {
+	width: 20.2667vw /* 76px -> 20.2667vw */;
+	height: 9.0667vw /* 34px -> 9.0667vw */;
+
+	color: #bf2a2f;
+}
+
+.tabbar-btn-sm::after {
+	position: absolute;
+
+	top: 0;
+	left: 0;
+
+	border: 1px solid #bf2a2f;
+	border-radius: 3px;
+	box-sizing: border-box;
+	width: 200%;
+	height: 200%;
+
+	transform: scale(0.5);
+	transform-origin: left top;
+
+	content: "";
+}
+
+.tabbar-btn-sm > i {
+	margin-right: 1.6vw /* 6px -> 1.6vw */;
+}
+
+.tabbar-btn-sm + .tabbar-btn-sm {
+	margin-left: 2.6667vw /* 10px -> 2.6667vw */;
+}
+
+.tabbar-btn-l {
+	margin-left: 19.4667vw /* 73px -> 19.4667vw */;
+	border-radius: 3px;
+	border: 1px solid #bf2a2f;
+	width: 32vw /* 120px -> 32vw */;
+	height: 9.0667vw /* 34px -> 9.0667vw */;
+
+	color: #fff;
+	background-color: #bf2a2f;
+}

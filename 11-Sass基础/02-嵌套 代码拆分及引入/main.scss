@@ -1,0 +1,14 @@
+// 引入文件
+@import './variables';
+@import './header';
+@import './content';
+
+// 嵌套语法
+div {
+	span {
+		color: red;
+		a {
+			color: blue;
+		}
+	}
+}

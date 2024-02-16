@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建局部组件（建议局部组件首字母大写，使用驼峰命名法）
+		const Component = {
+			data() {
+				return {
+					message: '局部组件',
+				};
+			},
+			template: `<div>{{message}}</div>`,
+		};
+
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {
+				Component, // ES2015 属性的简洁表示法，Vue 会自动转换
+			},
+			// 数据
+			data() {
+				return {
+					message: 'hello world',
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {},
+			// 根组件
+			template: `
+				<div>
+					{{message}}
+					<hello-world />
+					<counter />
+					<counter />
+					<counter />
+					<component />
+				</div>
+			`,
+		});
+
+		// 全局注册，会影响性能（名字建议小写，中间使用 - 间隔）
+		app.component('hello-world', {
+			template: `<div>hello world</div>`,
+		});
+
+		// 组件可复用，各组件独立
+		app.component('counter', {
+			data() {
+				return {
+					count: 1,
+				};
+			},
+			template: `<div @click="count+=1">{{count}}</div>`,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="destination-page" class="destination-layout">
+			<!-- 头部 -->
+			<div class="header-layout">
+				{{include './components/header/header.art'}}
+			</div>
+
+			<!-- 选项卡 -->
+			<div class="tab-layout">
+				{{include './components/tab/tab.art'}}
+			</div>
+
+			<!-- 内容 -->
+			<div class="main-content-layout">
+				{{include './components/main-content/main_content.art'}}
+			</div>
+
+			<!-- 标签栏 -->
+			<div class="tabbar-layout">
+				<% include('../../components/tabbar/tabbar.art', {active:'destination'}) %>
+			</div>
+
+			<!-- 返回顶部按钮 -->
+			<div class="backtop-layout">
+				{{include '../../components/backtop/backtop.art'}}
+			</div>
+		</div>
+	</body>
+</html>

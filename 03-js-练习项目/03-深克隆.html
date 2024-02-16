@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //递归实现深克隆（去除藕断丝连，即浅拷贝为基本数据类型新建，引用类型拷贝）
+        // 如果遍历到项是基本类型值
+        // 则直接推入结果数组;如果遍历到的项是又是数组
+        // 则重复执行浅克隆的操作
+
+        var oldArr = [4, 5, 125, 55, [1, 2, 3]];
+
+        function deepCopy(arr) {
+            var result = new Array();
+            for (var i = 0; i < arr.length; i++) {
+                if (Array.isArray(arr[i])) {
+                    result.push(deepCopy(arr[i]));
+                } else {
+                    result.push(arr[i]);
+                }
+            }
+            return result;
+        }
+
+        var newArr = deepCopy(oldArr);
+        oldArr[4].push(999);
+
+        console.log(oldArr);
+        console.log(newArr);
+    </script>
+
+</body>
+
+</html>

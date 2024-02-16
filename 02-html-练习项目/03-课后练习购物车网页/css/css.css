@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*  去掉列表圆点 */
+ul,
+ol {
+    list-style: none;
+}
+
+/* 去掉链接下划线 */
+a {
+    text-decoration: none;
+}
+
+/* 使用继承性设置字体样式 */
+body {
+    font: normal 14px/25px "微软雅黑";
+    min-width: 1200px;
+}
+
+/* 伪元素清除浮动 */
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    /* 不允许左右两侧有浮动 */
+    clear: both;
+    /*元素是否可见*/
+    visibility: hidden;
+}
+
+.content {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 200px;
+    padding: 50px;
+    background-color: #fafafa;
+    overflow: hidden;
+    position: relative;
+}
+
+.content .btn {
+    float: left;
+    margin: 15px 0;
+    height: 70px;
+}
+
+.content .cart {
+    float: right;
+    height: 100px;
+}
+
+.content .num {
+    position: absolute;
+    right: 40px;
+    background-color: red;
+    color: whitesmoke;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 20px;
+}

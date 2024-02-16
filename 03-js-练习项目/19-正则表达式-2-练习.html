@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .pwd-info {
+            display: inline-block;
+        }
+
+        .pwd-info .info-box {
+            display: inline-block;
+            width: 30px;
+            height: 10px;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <form action="" id="register">
+            <div>
+                *用&nbsp;&nbsp;户&nbsp;&nbsp;名：
+                <input type="text" id="user-field" placeholder="用户名设置成功后不可更改">
+                <span id="user-prompt"></span>
+            </div>
+            <div>
+                *登录密码：
+                <input type="text" id="pwd-field" placeholder="6-20位字母或数字">
+                <span id="pwd-prompt"></span>
+                <span class="pwd-info">
+                    <em class="info-box" id="info-red"></em>
+                    <em class="info-box" id="info-yellow"></em>
+                    <em class="info-box" id="info-green"></em>
+                </span>
+            </div>
+            <div>
+                *确认密码：
+                <input type="text" id="confirm-field" placeholder="再次输入您的登录密码">
+                <span id="confirm_prompt"></span>
+            </div>
+            <button type="submit" id="submit">确认</button>
+        </form>
+    </div>
+
+    <script>
+        var user_regexp = /^[a-zA-Z]{1,}\w{5,29}$/;
+        // var pwd_default_regexp = /^[a-z]{6,20}$|^[A-Z]{6,20}$|^[0-9]{6,20}$/;
+        // var pwd_normal_regexp = /^(?=.*[0-9])(?=.*[a-z])[0-9a-z]{6,20}$|^(?=.*[0-9])(?=.*[A-Z])[0-9A-Z]{6,20}$|^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,20}$/;
+        // var pwd_plus_regexp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,20}$/;
+        var pwd_default_regexp = /^[a-z]{6,20}$|^[A-Z]{6,20}$|^[0-9]{6,20}$/;
+        var pwd_normal_regexp = /^[0-9a-z]{6,20}$|^[0-9A-Z]{6,20}$|^[a-zA-Z]{6,20}$/;
+        var pwd_plus_regexp = /^[0-9a-zA-Z]{6,20}$/;
+
+        var user_input = document.getElementById("user-field");
+        var pwd_input = document.getElementById("pwd-field");
+        var confirm_input = document.getElementById("confirm-field");
+        var submit_btn = document.getElementById("submit");
+
+        var user_check = 0;
+        var pwd_check = 0;
+        var confirm_check = 0;
+
+        user_input.oninput = function () {
+            user_check = 0;
+            var user_prompt = document.getElementById("user-prompt");
+            if (user_regexp.test(user_input.value)) {
+                user_check = 1;
+                user_prompt.style.color = "green";
+                user_prompt.innerText = "用户名输入正确";
+            } else {
+                user_prompt.style.color = "red";
+                user_prompt.innerText = "6-30位字母、数字或“_”，字母开头";
+            }
+        };
+
+        pwd_input.oninput = function () {
+            pwd_check = 0;
+            var pwd_prompt = document.getElementById("pwd-prompt");
+            if (pwd_default_regexp.test(pwd_input.value)) {
+                pwd_check = 1;
+                pwd_prompt.style.display = "none";
+                document.getElementById("info-red").style.backgroundColor = "red";
+                document.getElementById("info-yellow").style.backgroundColor = "gray";
+                document.getElementById("info-green").style.backgroundColor = "gray";
+            } else if (pwd_normal_regexp.test(pwd_input.value)) {
+                pwd_check = 1;
+                pwd_prompt.style.display = "none";
+                document.getElementById("info-red").style.backgroundColor = "red";
+                document.getElementById("info-yellow").style.backgroundColor = "yellow";
+                document.getElementById("info-green").style.backgroundColor = "gray";
+            } else if (pwd_plus_regexp.test(pwd_input.value)) {
+                pwd_check = 1;
+                pwd_prompt.style.display = "none";
+                document.getElementById("info-red").style.backgroundColor = "red";
+                document.getElementById("info-yellow").style.backgroundColor = "yellow";
+                document.getElementById("info-green").style.backgroundColor = "green";
+            } else {
+                pwd_prompt.style.display = "";
+                pwd_prompt.style.color = "red";
+                pwd_prompt.innerText = "6-20位字母或数字";
+                document.getElementById("info-red").style.backgroundColor = "gray";
+                document.getElementById("info-yellow").style.backgroundColor = "gray";
+                document.getElementById("info-green").style.backgroundColor = "gray";
+            }
+        };
+
+        confirm_input.oninput = function () {
+            confirm_check = 0;
+            var confirm_prompt = document.getElementById("confirm_prompt");
+            if (confirm_input.value === "") {
+                confirm_prompt.style.color = "red";
+                confirm_prompt.innerText = "输入框不能为空";
+            } else if (confirm_input.value === pwd_input.value) {
+                confirm_check = 1;
+                confirm_prompt.style.color = "green";
+                confirm_prompt.innerText = "两次密码输入一致";
+            } else {
+                confirm_prompt.style.color = "red";
+                confirm_prompt.innerText = "两次输入不一致";
+            }
+        };
+
+        submit_btn.onclick = function () {
+            if (user_check == 1 && pwd_check == 1 && confirm_check == 1) {
+                alert("信息填写正确");
+            } else {
+                alert("请填写正确的信息");
+            }
+        }
+    </script>
+</body>
+
+</html>

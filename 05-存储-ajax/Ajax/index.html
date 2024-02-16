@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script type="module">
+			import { ajax, get, getJSON, post } from "./js/index.js";
+
+			const url = "https://www.mooc.com/api/http/json/search/suggest?words=js";
+
+			const p = getJSON(url, {
+				params: { username: "白给" },
+				data: { age: 18 },
+			});
+
+			const { ERROR_HTTP_CODE, ERROR_REQUEST, ERROR_ABORT, ERROR_TIMEOUT } = p;
+
+			p.then((response) => {
+				console.log(response);
+			}).catch((error) => {
+				console.log("错误！");
+				switch (error.type) {
+					case ERROR_HTTP_CODE:
+						console.log(error.message);
+						break;
+					case ERROR_REQUEST:
+						console.log(error.message);
+						break;
+					case ERROR_ABORT:
+						console.log(error.message);
+						break;
+					case ERROR_TIMEOUT:
+						console.log(error.message);
+						break;
+				}
+			});
+		</script>
+	</body>
+</html>

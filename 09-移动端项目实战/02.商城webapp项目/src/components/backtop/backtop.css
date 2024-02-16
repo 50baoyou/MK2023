@@ -1,0 +1,28 @@
+.backtop {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 50%;
+	width: 12vw /* 45px -> 12vw */;
+	height: 12vw /* 45px -> 12vw */;
+
+	background-color: rgba(39, 195, 147, 0.8);
+
+	opacity: 0;
+
+	transition-delay: 0s;
+	transition-timing-function: linear;
+	transition-duration: 0.4s;
+	transition-property: opacity;
+}
+
+.backtop > i {
+	font-size: 8vw /* 30px -> 8vw */;
+
+	color: #fff;
+}
+
+.backtop-hidden {
+	opacity: 1;
+}

@@ -1,0 +1,100 @@
+{{ set first_index = 0 }}
+{{ set last_index = items.length - 1 }}
+{{ set first_item = items[first_index] }}
+{{ set last_item = items[last_index] }}
+
+
+<div class="col1">
+    <ul>
+              <li class="grid big">
+                <a href="">
+                  <div class="pic">
+                    <img class="p-img" src="{{one.url}}" alt="" />
+                  </div>
+                  <div class="tip">
+                    <div class="inn">
+                      {{one.title}}
+                    </div>
+                    <div class="type">{{one.tyoe}}</div>
+                    <div class="price">
+                      <span>{{one.price}}</span>
+                      元起
+                    </div>
+                  </div>
+                </a>
+              </li>
+
+            <li class="grid">
+                <a href="">
+                  <div class="pic">
+                    <p>{{first_index}}<p/>
+                    <img class="p-img" src="{{first_item.url}}" alt="" />
+                  </div>
+                  <div class="tip">
+                    <div class="inn">
+                      {{first_item.title}}
+                    </div>
+                  </div>
+                </a>
+              </li>
+    </ul>
+</div>
+
+
+<div class="col2">
+    <ul>
+        {{each items}}
+            {{if $index > first_index && $index < last_index}}
+            <li class="grid">
+                <a href="">
+                  <div class="pic">
+                    <img class="p-img" src="{{$value.url}}" alt="" />
+                  </div>
+                  <div class="tip">
+                    <div class="inn">
+                      {{$value.title}}
+                    </div>
+                  </div>
+                </a>
+              </li>
+              {{/if}}
+        {{/each}}
+    </ul>
+</div>
+
+<div class="col3">
+    <ul>
+              <li class="grid">
+                <a href="">
+                  <div class="pic">
+                    <img class="p-img" src="{{last_item.url}}" alt="" />
+                  </div>
+                  <div class="tip">
+                    <div class="inn">
+                      {{last_item.title}}
+                    </div>
+                  </div>
+                </a>
+              </li>
+
+              <li class="more grid">
+                <a href="">
+                  <div class="more_con">
+                    查看更多<br />
+                    {{more.title}}
+                  </div>
+                  <div class="arrow">
+                    <b class="iconfont">&#xe602;</b>
+                  </div>
+                  <div class="tj">
+
+                    <ul>
+                      {{each more.items}}
+						<li>{{$value}}</li>
+					  {{/each}}
+                    </ul>
+                  </div>
+                </a>
+              </li>
+    </ul>
+</div>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					message: 'hello world!',
+					parms: {
+						name: 'xk',
+						age: 30,
+						tag: '347 or 443',
+					},
+					count: 1,
+				};
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {
+					this.count += 1;
+				},
+			},
+			// 根组件
+			template: `
+				<div>
+					{{message}} {{count}}
+					<div @click="handleClick()">点击</div>
+
+					<demo :content="parms" data-abc="xixi" />
+					<counter :content="count" />
+
+					<p>通过触发父组件的事件来修改父组件发送数据</p>
+					<demo :content="count" :handle="handleClick" />
+					<demo :content="count" :handle="handleClick" />
+					<demo :content="count" :handle="handleClick" />
+
+					<nonProp msg="non" style="color:red" />
+				</div>
+			`,
+		});
+
+		// Non-prop 属性
+		/**
+		 * 指那些不应该作为组件的 props 传递的属性。
+		 * 这些属性通常是用于组件自身的配置或者样式等方面的。
+		 * 在组件中使用 Non-prop 属性时，应该使用 $attrs 对象来传递这些属性，而不是直接将它们作为 props 传递。
+		 * 这样可以避免将这些属性传递给子组件，从而避免出现不必要的警告或错误。
+		 **/
+		app.component('nonProp', {
+			// 是否将父组件中非 prop 属性继承
+			// inheritAttrs: false,
+			mounted() {
+				// $attrs 对象是一个包含了父组件传递给子组件但子组件没有声明为prop的所有属性的对象
+				console.log(this.$attrs);
+			},
+			template: `
+				<div :title="$attrs.msg">Non-prop 属性</div>
+				<div :style="$attrs.style">Non-prop 属性</div>
+				<div>Non-prop 属性</div>
+			`,
+		});
+
+		app.component('demo', {
+			// data-abc 这种形式需要转换为驼峰命名
+			props: ['content', 'dataAbc'],
+			template: `
+				<div>{{content.name}}-{{content.age}}--{{content.tag}}--{{dataAbc}}</div>
+			`,
+		});
+
+		// 单向数据流
+		// 在子组件中，props 是只读的，也就是说不能直接修改 props 中的数据
+		app.component('counter', {
+			props: ['content'],
+			data() {
+				return {
+					myContent: this.content,
+				};
+			},
+			template: `
+				<div @click="myContent+=1">{{myContent}}</div>
+			`,
+		});
+
+		// 但是，可以通过触发父组件的事件来修改父组件发送的数据
+		app.component('demo', {
+			props: ['content', 'handle'],
+			template: `
+				<div @click="handle()">{{content}}</div>
+			`,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

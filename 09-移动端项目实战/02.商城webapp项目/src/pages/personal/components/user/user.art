@@ -1,0 +1,7 @@
+<div class="user">
+    <div class="user-pic">
+        <img class="user-img" src="../../img/user.png" alt=""/> 
+    </div>
+    <div class="user-name">王豆豆</div>
+    <div class="user-phone">18911023266</div>
+</div>

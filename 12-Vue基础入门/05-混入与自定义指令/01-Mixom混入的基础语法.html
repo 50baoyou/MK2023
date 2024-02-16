@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		/**
+		 * Mixin（混入） 是一种可重用的代码组织方式。
+		 * 它可以将一些常用的选项或逻辑抽象出来，然后混入到多个组件中。
+		 * 通过 mixin，可以避免在多个组件中重复编写相同的代码，提高代码的复用性和可维护性。
+		 *
+		 * 组件中的 data，methods 优先级高于 混入中引入的
+		 * 生命周期函数，先执行 mixin 中的，在执行组件中的
+		 * 自定义的属性，组件中的属性优先级高于 mixin 中的属性
+		 **/
+
+		// 局部 mixin
+		const myMixin = {
+			tag: 347,
+			data() {
+				return {
+					num: 1,
+					msg: 'Mixin（混入） 是一种可重用的代码组织方式。',
+				};
+			},
+			created() {
+				console.log('混入生命周期函数（优先）');
+			},
+			methods: {
+				handleClick() {
+					console.log('mixin handleClick');
+				},
+			},
+		};
+
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 引入 mixin 对象
+			mixins: [myMixin],
+			// 自定义属性
+			tag: 443,
+			// 局部注册
+			components: {},
+			// 数据
+			data() {
+				return {
+					num: 2,
+					message: 'hello world!',
+				};
+			},
+			created() {
+				console.log('组件中的生命周期函数');
+			},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {
+					console.log('handleClick 覆盖混入中的方法');
+				},
+			},
+			// 根组件
+			template: `
+				<div>
+                    使用自定义属性{{this.$options.tag}}
+
+                    <button @click="handleClick">点击</buttom>
+                </div>
+			`,
+		});
+
+		// 自定义属性的合并策略
+		app.config.optionMergeStrategies.tag = (mixinVal, appVal) => {
+			return mixinVal || appVal;
+		};
+
+		// （不推荐使用）全局 mixin，自动注入所有子组件中
+		// app.mixin({
+		// 	data() {
+		// 		return {
+		// 			text: '引入全局mixin',
+		// 		};
+		// 	},
+		// });
+
+		// app.component('demo', {
+		// 	template: `<div>{{text}}</div>`,
+		// });
+
+		const vm = app.mount('#root');
+	</script>
+</html>

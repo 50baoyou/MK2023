@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function fun() {
+            num2 = 99;
+
+            setnum2 = function (n) {
+                num2 = n;
+                alert(num2);
+            }
+
+            function fn1() {
+                alert('num2 = ' + num2);
+            }
+
+            return fn1;
+        }
+
+        // 闭包中的全局变量指向同一个地址
+
+        var type1 = fun(); //定义全局变量num2并赋值99
+        type1(); //99
+        setnum2(999); //设置num2=999
+        type1(); //999
+
+        var type2 = fun(); //创建新的闭包并把num2重新赋值99
+        type1(); //99
+        type2(); //99
+
+        setnum2(888); //设置num2=888
+        type1(); //888
+        type2(); //888
+    </script>
+</body>
+
+</html>

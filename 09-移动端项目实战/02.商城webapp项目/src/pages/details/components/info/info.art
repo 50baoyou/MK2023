@@ -1,0 +1,52 @@
+<div class="info">
+	<div class="info-bg">
+		<img class="info-img" src="{{data.img}}" alt="" />
+	</div>
+
+	<div class="info-content">
+		<div class="info-title">{{data.title}}</div>
+
+		<div class="info-tags">
+			{{each data.tags}}
+			<div class="info-tag">{{$value}}</div>
+			{{/each}}
+		</div>
+
+		<div class="info-box">
+			<div class="info-vistor">浏览 {{data.vistor_counts}}</div>
+			<div class="info-sold">已售 {{data.sold_counts}}份</div>
+		</div>
+
+		<div class="info-line"></div>
+	</div>
+
+	<div class="info-part info-about">
+		<div class="info-h2">
+			<span></span>
+			<h2>产品简介</h2>
+		</div>
+		<div class="info-text">
+			{{each data.intros}}
+			<p>{{$value}}</p>
+			<p>{{/each}}</p>
+		</div>
+	</div>
+
+	<div class="info-part info-reserve">
+		<div class="info-h2">
+			<span></span>
+			<h2>预定流程</h2>
+		</div>
+		<div class="info-reserve-pic">
+			<img class="info-reserve-img" src="./prebook.png" alt=""/>
+		</div>
+	</div>
+
+	<div class="info-part info-refund">
+		<div class="info-h2">
+			<span></span>
+			<h2>退款流程</h2>
+		</div>
+		<div class="info-text">{{data.refund}}</div>
+	</div>
+</div>

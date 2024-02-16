@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+		<title>click事件延迟</title>
+
+		<style>
+			.btn {
+				width: 100%;
+				height: 300px;
+				font-size: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn" class="btn">提交</button>
+
+		<script>
+			//  原因：在早期的手机上，浏览器为了能够实现放大和缩放功能，采用双击的方式来达到这样的交互效果，
+			//  为了实现这样的效果，浏览器需要判断用户在第一次触碰屏幕之后，是否在300ms之内再次点击，
+			//  有则表明用户希望缩放和放大，所以click事件会推迟到300ms之后运行。
+
+			//  解决方案
+			//      1-不使用 click 事件，改为 touchstart 或 touchend
+			//      2-禁止双击缩放 user-scalable=no , minimum-scale=1 , maximum-scale=1
+			//      3-在 CSS 中添加 touch-action:manipulation 停用点按两次手势
+			//      4-兼容旧浏览器，使用 Fastclick 库
+
+			const $btn = document.getElementById("btn");
+
+			$btn.addEventListener(
+				"touchstart",
+				() => {
+					console.log("触摸事件");
+					console.time("click");
+				},
+				false
+			);
+
+			$btn.addEventListener(
+				"click",
+				() => {
+					console.timeEnd("click");
+					console.log("点击事件");
+				},
+				false
+			);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,5 @@
+动画优化
+
+    1.优先使用 CSS3 过渡和动画
+    2.优先使用 translate3d 做运动
+    3.必须使用 JS 做动画时，使用 requestAnimationFrame

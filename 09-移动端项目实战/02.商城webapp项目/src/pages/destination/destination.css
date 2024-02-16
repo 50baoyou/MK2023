@@ -1,0 +1,32 @@
+.destination-layout {
+	display: grid;
+	grid-template-columns: 20.2667vw 1fr;
+	grid-template-rows: 39.7333vw minmax(0, 1fr) 12.8vw;
+	grid-template-areas:
+		"header header"
+		"tab main-content"
+		"tabbar tabbar";
+
+	width: 100%;
+	height: 100%;
+}
+
+.header-layout {
+	grid-area: header;
+}
+
+.tab-layout {
+	grid-area: tab;
+
+	background-color: #fafafa;
+}
+
+.main-content-layout {
+	grid-area: main-content;
+
+	background-color: #fff;
+}
+
+.tabbar-layout {
+	grid-area: tabbar;
+}

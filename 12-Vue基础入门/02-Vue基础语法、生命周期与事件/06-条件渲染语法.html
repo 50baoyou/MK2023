@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.red {
+				color: red;
+			}
+			.green {
+				color: green;
+			}
+		</style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			const app = Vue.createApp({
+				// 数据
+				data() {
+					return {
+						message: 'hello world',
+						/**
+						 * v-if 和 v-show 都是 Vue 中用于控制元素显示和隐藏的指令，但它们的实现方式不同
+						 *
+						 * v-if 是通过条件判断来控制元素是否渲染到 DOM 中
+						 * 如果条件为 false，则元素不会被渲染到 DOM 中，如果条件为 true，则元素会被渲染到 DOM 中
+						 * v-if 在切换时有一个切换的开销，因为它会重新渲染整个元素及其子组件。
+						 *
+						 * v-show 是通过 CSS 的 display 属性来控制元素的显示和隐藏
+						 * 如果条件为 false，则元素的 display 属性会被设置为 none，如果条件为 true，则元素的 display 属性会被设置为原来的值
+						 * v-show 在切换时没有切换的开销，因为它只是简单地切换了元素的 display 属性。
+						 *
+						 * 因此，如果需要频繁切换元素的显示和隐藏，建议使用 v-show，如果元素的显示和隐藏不频繁，建议使用 v-if。
+						 **/
+						show: false,
+
+						tag: false,
+						tagTwo: true,
+					};
+				},
+				// 侦听器
+				watch: {},
+				// 计算属性
+				computed: {},
+				// 方法
+				methods: {},
+				template: `
+					<div v-if="show">{{message}}</div>
+                    <div v-show="show">v-show</div>
+
+                    <div v-if="tag">v-if 和 v-else</div>
+                    <div v-else-if>else-if</div>
+                    <div v-else>false</div>
+                `,
+			});
+
+			const vm = app.mount('#root');
+		</script>
+	</body>
+</html>

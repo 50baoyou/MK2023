@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 根组件
+			template: `
+				<div>
+					<span @click="handleClick">{{count}}</span>
+					<div>{{countAddResult}}</div>
+		    	</div>
+			`,
+			// 组合式 API 的入口
+			setup(props, context) {
+				const { ref, reactive, computed } = Vue;
+				const count = ref(1);
+
+				const handleClick = () => {
+					count.value += 1;
+				};
+
+				// 推荐使用计算属性来描述依赖响应式状态的复杂逻辑
+				const countAddResult = computed({
+					// Vue 的计算属性会自动追踪响应式依赖
+					// return `计算结果=${count.value + 1}`;
+
+					// computed() 方法期望接收一个 getter 函数，返回值为一个计算属性 ref
+					get: () => {
+						return `计算结果=${count.value + 1}`;
+					},
+					// 计算属性默认是只读的。
+					// 需要用到“可写”的属性，可以通过同时提供 getter 和 setter 来创建
+					set: (newValue) => {
+						count.value = newValue + 2;
+					},
+				});
+
+				setTimeout(() => {
+					console.log('修改');
+					countAddResult.value = 100;
+				}, 1000);
+
+				return {
+					count,
+					handleClick,
+					countAddResult,
+				};
+			},
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

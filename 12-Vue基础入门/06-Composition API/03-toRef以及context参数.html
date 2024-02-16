@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 根组件
+			template: `
+				<div>{{data}}</div>
+                <demo app="demo"  @change="fn">
+                    父组件传入的内容
+                <demo />
+			`,
+			// 组合式 API 的入口
+			setup(props, context) {
+				/**
+				 * toRef 和 toRefs 都是用于将响应式对象的属性转换为单独的响应式引用的方法。
+				 * 它们的区别在于 toRef 只能将一个属性转换为响应式引用,
+				 * 而 toRefs 可以将整个对象的属性都转换为响应式引用。
+				 **/
+				const { reactive, toRef } = Vue;
+				const data = reactive({ name: 'xk' });
+
+				// toRef 接受两个参数：第一个参数是响应式对象，第二个参数是要转换为响应式引用的属性名。
+				const age = toRef(data, 'age');
+				setTimeout(() => {
+					age.value = 30;
+				}, 1000);
+
+				function fn() {
+					alert('子组件的点击自定义事件');
+				}
+
+				return {
+					data,
+					fn,
+				};
+			},
+		});
+
+		app.component('demo', {
+			template: `
+				<div @click="handleClick">hello world <slot/></div>
+			`,
+			// 传入 setup 函数的第二个参数是一个 Setup 上下文对象。
+			// 上下文对象暴露了其他一些在 setup 中可能会用到的值。
+			// 该上下文对象是非响应式的，可以安全地解构：{ attrs, slots, emit, expose }
+			setup(props, context) {
+				// 透传 Attributes（非响应式的对象，等价于 $attrs）
+				console.log(context.attrs); // 父组件调用时传入的 app 属性
+
+				// 插槽（非响应式的对象，等价于 $slots）
+				console.log(context.slots); // 父组件传入的插槽内容
+
+				// 触发事件（函数，等价于 $emit）
+				console.log(context.emit);
+
+				// 暴露公共属性（函数）
+				console.log(context.expose);
+
+				function handleClick() {
+					context.emit('change');
+				}
+
+				return {
+					handleClick,
+				};
+			},
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

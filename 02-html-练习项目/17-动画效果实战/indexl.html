@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bulb {
+            position: absolute;
+            top: 300px;
+            left: 300px;
+        }
+
+        .light {
+            position: absolute;
+            top: 235px;
+            left: 222px;
+            animation: flush 1s ease 0s infinite alternate;
+        }
+
+        @keyframes flush {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .rocket {
+            position: absolute;
+            top: 300px;
+            left: 800px;
+            animation: fly 2s ease 0s infinite alternate;
+        }
+
+        @keyframes fly {
+            from {
+                transform: translateX(-30px) translateY(-30px);
+            }
+
+            to {
+                transform: translateX(30px) translateY(30px);
+            }
+        }
+
+        .line1 {
+            width: 2px;
+            height: 166px;
+            background-color: blueviolet;
+            position: absolute;
+            top: 300px;
+            left: 800px;
+            animation: line_move 1s linear 0s infinite;
+            opacity: 0;
+        }
+
+        .line2 {
+            width: 2px;
+            height: 166px;
+            background-color: blueviolet;
+            position: absolute;
+            top: 300px;
+            left: 1000px;
+            animation: line_move 1s linear 1s infinite;
+            opacity: 0;
+        }
+
+        .line3 {
+            width: 2px;
+            height: 166px;
+            background-color: blueviolet;
+            position: absolute;
+            top: 300px;
+            left: 900px;
+            animation: line_move 1s linear 0.5s infinite;
+            opacity: 0;
+        }
+
+        @keyframes line_move {
+            0% {
+                transform: rotate(45deg) translateY(-300px);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotate(45deg) translateY(300px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img class="bulb" src="img/dengpao.png" alt="">
+    <img class="light" src="img/guang.png" alt="">
+
+    <img class="rocket" src="img/huojian.png" alt="">
+
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+</body>
+
+</html>

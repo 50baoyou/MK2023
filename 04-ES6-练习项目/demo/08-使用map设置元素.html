@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <script>
+        const [p1, p2, p3] = document.querySelectorAll('p')
+
+        const createMap = (color = 'black', backgroundColor = 'while', fontSize = '20px') => {
+            return new Map([
+                ["color", color],
+                ["backgroundColor", backgroundColor],
+                ["fontSize", fontSize]
+            ]);
+        }
+
+        const m = new Map([
+            [p1, createMap("red", "yellow", "40px")],
+            [p2, createMap("green", "pink", "40px")],
+            [p3, createMap("blue", "orange", "40px")]
+        ]);
+
+        m.forEach((map, elem) => {
+            map.forEach((v, k) => {
+                elem.style[k] = v;
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+.course {
+	font-size: 14px;
+}
+
+.course-title {
+	padding: 0 0 10px 20px;
+	color: #191919;
+	font-size: 2.1333vw /* 16px -> 2.1333vw */;
+}
+
+.course-list {
+	display: flex;
+	flex-wrap: wrap;
+	padding-right: 20px;
+}
+
+.course-item {
+	width: 50%;
+	padding: 0 0 10px 20px;
+	font-size: 1.8667vw /* 14px -> 1.8667vw */;
+}
+
+.course-pic {
+	margin-bottom: 6px;
+}
+
+.course-img {
+	width: 100%;
+}
+
+.course-name {
+	height: 10.6667vw /* 80px -> 10.6667vw */;
+	line-height: 5.3333vw /* 40px -> 5.3333vw */;
+	margin-bottom: 0.5333vw /* 4px -> .5333vw */;
+	color: #333;
+
+	/* 多行文字省略 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	white-space: normal !important;
+	word-wrap: break-word;
+}
+
+.course-price {
+	color: #e93b3b;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+
+		<style>
+			html,
+			body,
+			.progress {
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			img {
+				max-width: 100%;
+			}
+			.progress {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 50px;
+				font-weight: bolder;
+			}
+			.none {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="progress" class="progress">0%</div>
+
+		<div id="content" class="none"></div>
+
+		<script>
+			function wait(ms, msg = "等待时间") {
+				return new Promise((resolve) => {
+					setTimeout(() => {
+						resolve(msg);
+					}, 1000);
+				});
+			}
+
+			function loadImgAsync(url) {
+				return new Promise((resolve, reject) => {
+					const $img = new Image();
+
+					$img.addEventListener(
+						"load",
+						async () => {
+							// await wait(2000);
+							resolve($img);
+						},
+						false
+					);
+
+					$img.addEventListener(
+						"error",
+						() => {
+							reject(new Error("Could not load image at " + url));
+						},
+						false
+					);
+
+					$img.src = url;
+				});
+			}
+
+			class Progress {
+				constructor($el) {
+					this.$el = $el;
+				}
+
+				update(done, total) {
+					this.$el.innerHTML = `${parseInt((done / total) * 100)}%`;
+				}
+
+				hide() {
+					this.$el.classList.add("none");
+				}
+			}
+
+			(async () => {
+				// const imgUrls = ["./ad.jpg", "./ad_psyc.jpg", "./logo.png"];
+				const imgUrls = [
+					"https://img1.mydrivers.com/Img/20100731/08213345.jpg",
+					"https://img1.mydrivers.com/Img/20100731/08230220.jpg",
+					"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg2.niutuku.com%2Fdesk%2F1208%2F2007%2Fntk-2007-25584.jpg&refer=http%3A%2F%2Fimg2.niutuku.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1654222356&t=c1a0d60776a99882cc8e22192c4b12c1",
+					"",
+				];
+
+				const $content = document.getElementById("content");
+				const $progress = document.getElementById("progress");
+
+				let done = 0;
+				const total = imgUrls.length;
+
+				const progress = new Progress($progress);
+
+				// async 函数内部是同步执行的，但它本身是异步的
+
+				// 继发
+				// for (const url of imgUrls) {
+				// 	const $img = await loadImgAsync(url);
+				// 	console.log($img);
+				// 	$content.appendChild($img);
+				// 	done++;
+
+				// 	progress.update(done, total);
+				// }
+
+				// 并发
+				// 创建了多个 async 函数 异步执行
+				imgUrls.forEach(async (url) => {
+					// const $img = await loadImgAsync(url);
+					// console.log($img);
+					// $content.appendChild($img);
+					// done++;
+
+					// progress.update(done, total);
+					try {
+						const $img = await loadImgAsync(url);
+						console.log($img);
+						$content.appendChild($img);
+						done++;
+
+						progress.update(done, total);
+					} catch (error) {
+						console.log(error);
+					}
+				});
+
+				await wait(500);
+
+				progress.hide();
+
+				$content.classList.remove("none");
+			})();
+		</script>
+	</body>
+</html>

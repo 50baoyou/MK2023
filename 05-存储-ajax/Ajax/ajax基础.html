@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<script>
+			const url = "https://www.imooc.com/api/http/json/search/suggest?words=js";
+			const xhr = new XMLHttpRequest();
+
+			// xhr.onreadystatechange = () => {
+			// 	if (xhr.readyState !== 4) {
+			// 		return;
+			// 	}
+
+			// 	if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+			// 		console.log(xhr.responseText);
+			// 	}
+			// };
+
+			// load事件，响应数据可用时触发
+			xhr.addEventListener(
+				"load",
+				() => {
+					if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+						console.log(xhr.response);
+					}
+				},
+				false
+			);
+
+			// error事件，请求出错时触发
+			xhr.addEventListener(
+				"error",
+				() => {
+					console.log(error);
+				},
+				false
+			);
+
+			// abort事件，取消请求时触发
+			xhr.addEventListener(
+				"abort",
+				() => {
+					console.log(abort);
+				},
+				false
+			);
+
+			// timeout事件，响应超时触发
+			xhr.addEventListener(
+				"timeout",
+				() => {
+					console.log(timeout);
+				},
+				false
+			);
+
+			// 启动请求准备发送
+			xhr.open("get", url, false);
+
+			// 设置返回数据的格式
+			xhr.responseType = "json";
+
+			// 设置响应超时时间
+			xhr.timeout = 10000;
+
+			// 设置发送是否携带cookie
+			xhr.withCredentials = true;
+
+			// 设置请求头的信息（发送post请求时需要设置，告诉服务器发送的数据是什么格式）
+			xhr.setRequestHeader("Content-Type", "application/json");
+
+			// 发送请求
+			xhr.send(null);
+
+			// 取消当前请求
+			xhr.abort();
+		</script>
+	</body>
+</html>

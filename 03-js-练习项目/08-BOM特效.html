@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-part {
+            width: 1000px;
+            margin: 50px auto;
+            background-color: grey;
+            text-align: center;
+            font-size: 80px;
+        }
+
+        .nav-bar {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            margin-top: -100px;
+            background-color: antiquewhite;
+        }
+
+        .nav-bar ul {
+            list-style: none;
+        }
+
+        .nav-bar ul li {
+            width: 100px;
+            height: 40px;
+            border: 1px solid black;
+            line-height: 40px;
+            font-size: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .current {
+            background-color: green;
+            color: whitesmoke;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="list" class="nav-bar">
+        <ul>
+            <li data-n="科技" class="current">科技</li>
+            <li data-n="体育">体育</li>
+            <li data-n="新闻">新闻</li>
+            <li data-n="娱乐">娱乐</li>
+            <li data-n="视频">视频</li>
+        </ul>
+    </nav>
+
+    <section data-n="科技" class="content-part" style="height: 675px;">
+        1-科技栏目
+    </section>
+
+    <section data-n="体育" class="content-part" style="height: 775px;">
+        2-体育栏目
+    </section>
+
+    <section data-n="新闻" class="content-part" style="height: 875px;">
+        3-新闻栏目
+    </section>
+
+    <section data-n="娱乐" class="content-part" style="height: 975px;">
+        4-娱乐栏目
+    </section>
+
+    <section data-n="视频" class="content-part" style="height: 575px;">
+        5-视频栏目
+    </section>
+
+    <script>
+        var list = document.getElementById('list');
+        var part_list = document.querySelectorAll('.content-part');
+        var li_list = document.querySelectorAll('#list ul li');
+
+        // 事件委托批量添加监听器
+        list.onclick = function (e) {
+            if (e.target.tagName.toLowerCase() == 'li') {
+                var data_n = e.target.getAttribute('data-n');
+
+                var part = document.querySelector('.content-part[data-n=' + data_n + ']');
+                /* 
+                * offsetTop-当前元素（外边框）距离其父级参照物（内边框）的偏移距离
+                * 设置浏览器卷动值
+                */
+                document.documentElement.scrollTop = part.offsetTop - 50;
+            }
+        };
+
+
+        // 页面加载完成后，获取各个栏目的offsetTop值
+        var offsetTop_list = [];
+
+        for (var i = 0; i < part_list.length; i++) {
+            offsetTop_list.push(part_list[i].offsetTop - 50);
+        }
+        offsetTop_list.push(Infinity);
+
+
+        // 判断当前所在楼层
+        var now_level = -1;
+
+        // 浏览器窗口卷动事件监听器
+        window.onscroll = function () {
+            var scrollTop = document.documentElement.scrollTop;
+
+            // 判断当前在哪个部分
+            var level = 0;
+            for (level = 0; level < offsetTop_list.length; level++) {
+                if (scrollTop >= offsetTop_list[level] && scrollTop < offsetTop_list[level + 1]) {
+                    break;
+                }
+            }
+
+            if (now_level != level) {
+                console.log(scrollTop + '当前楼层：' + Number(level + 1));
+                now_level = level;
+
+                // 设置导航条样式
+                for (var i = 0; i < li_list.length; i++) {
+                    if (now_level == i) {
+                        li_list[i].className = 'current';
+                    } else {
+                        li_list[i].className = '';
+                    }
+                }
+            }
+        };
+
+    </script>
+</body>
+
+</html>

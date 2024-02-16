@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style></style>
+		<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+	</head>
+	<body>
+		<!-- 挂载点 -->
+		<div id="root"></div>
+	</body>
+	<script>
+		// plugin 插件
+		const validatePlugin = {
+			install(app, options) {
+				// 校验长度
+				app.config.globalProperties.$check = (key) => {
+					console.log(key.length, options.length);
+					return key.length > options.length ? '长度超出限制' : key;
+				};
+			},
+		};
+
+		// 创建 Vue 实例
+		const app = Vue.createApp({
+			// 数据
+			data() {
+				return {
+					message: '12345',
+				};
+			},
+			// 局部注册
+			components: {},
+			// 侦听器
+			watch: {},
+			// 计算属性
+			computed: {},
+			// 方法
+			methods: {
+				handleClick() {},
+			},
+			// mounted() {
+			// 	console.log(this.$options);
+			// },
+			// 根组件
+			template: `
+				<div>{{$check(message)}}</div>
+			`,
+		});
+
+		// 使用插件
+		app.use(validatePlugin, {
+			length: 4,
+		});
+
+		const vm = app.mount('#root');
+	</script>
+</html>

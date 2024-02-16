@@ -1,0 +1,6 @@
+.backtop-layout {
+	position: fixed;
+	right: 2.6667vw /* 10px -> 2.6667vw */;
+	bottom: 16vw /* 60px -> 16vw */;
+	z-index: 1100;
+}

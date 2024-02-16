@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        body {
+            background: #fff;
+            color: #5e5e5e;
+            font: 14px/2em "PingFang SC",
+                "微软雅黑",
+                "Microsoft YaHei",
+                Helvetica,
+                "Helvetica Neue",
+                Tahoma,
+                Arial,
+                sans-serif;
+        }
+
+        .clearfix::after,
+        .clearfix::before {
+            content: '';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .nav-bar {
+            padding: 0 100px;
+            height: 100px;
+            min-width: 800px;
+            background-color: #f7f7f7;
+        }
+
+        .nav-bar .left-box {
+            float: left;
+        }
+
+        .nav-bar .left-box>h2 {
+            line-height: 100px;
+            color: black;
+        }
+
+        .nav-bar .right-box {
+            position: relative;
+            float: right;
+            margin-top: 30px;
+        }
+
+        .nav-bar .right-box .line {
+            display: block;
+            position: absolute;
+            left: 30px;
+            bottom: 0;
+            width: 40px;
+            border: 1px solid #f01400;
+            transition: all .5s ease 0s;
+        }
+
+        .nav-bar .right-box>ul {
+            list-style: none;
+        }
+
+        .nav-bar .right-box>ul>li {
+            float: left;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .nav-bar .right-box>ul>li>a {
+            text-decoration: none;
+            color: #5e5e5e;
+        }
+
+        .nav-bar .right-box>ul>li>a.current {
+            color: #f01400;
+        }
+
+        .nav-bar .right-box>ul>li:last-child {
+            width: 120px;
+            background-color: black;
+        }
+
+        .nav-bar .right-box>ul>li:last-child>a {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-bar clearfix">
+        <div class="left-box">
+            <h2>慕课手机</h2>
+        </div>
+        <div class="right-box">
+            <span id="nav-line" class="line"></span>
+            <ul id="nav-list">
+                <li data-n="0"><a href="javascript:;" class="current">首页</a></li>
+                <li data-n="1"><a href="javascript:;">外观</a></li>
+                <li data-n="2"><a href="javascript:;">型号</a></li>
+                <li data-n="3"><a href="javascript:;">说明</a></li>
+                <li data-n="buy"><a href="javascript:;">立即购买</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script>
+    var nav_list = document.getElementById("nav-list");
+    var nav_line = document.getElementById("nav-line");
+    var a_list = document.querySelectorAll("#nav-list>li>a");
+    var num = 100;
+
+    nav_list.onmouseover = function (e) {
+        if (e.target.tagName.toLowerCase() === "li") {
+            var data_n = e.target.getAttribute("data-n");
+            if (data_n !== "buy") {
+                for (var i in a_list) {
+                    a_list[i].className = data_n;
+                }
+                e.target.getElementsByTagName("a")[0].className = "current";
+                nav_line.style.left = parseInt(data_n) * num + 30 + "px";
+            }
+        }
+    }
+
+
+</script>
+
+</html>

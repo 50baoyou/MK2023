@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .box1,
+        .box2 {
+            width: 600px;
+            height: 300px;
+            border: 1px dotted black;
+            background-clip: content-box;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gradual {
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background-image: radial-gradient(50% 50%, white 0%, white 60%, yellow 60%, yellow 70%, green 70%, green 80%, blue 80%, blue 90%, purple 90%, purple 100%);
+        }
+
+        .arc {
+            position: absolute;
+        }
+
+        .arc1 {
+            top: 0;
+            left: 0px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background-color: purple;
+        }
+
+        .arc2 {
+            top: 30px;
+            left: 30px;
+            width: 540px;
+            height: 540px;
+            border-radius: 50%;
+            background-color: blue;
+        }
+
+        .arc3 {
+            top: 60px;
+            left: 60px;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background-color: green;
+        }
+
+        .arc4 {
+            top: 90px;
+            left: 90px;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background-color: yellow;
+        }
+
+        .arc5 {
+            top: 120px;
+            left: 120px;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <div class="gradual"></div>
+    </div>
+    <div class="box2">
+        <div class="arc arc1"></div>
+        <div class="arc arc2"></div>
+        <div class="arc arc3"></div>
+        <div class="arc arc4"></div>
+        <div class="arc arc5"></div>
+    </div>
+</body>
+
+</html>
